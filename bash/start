@@ -1,0 +1,5 @@
+if [ -z "$DISPLAY" ] && [ $(tty) == /dev/tty5 ]; then
+    screen -d -m  -S grishka&
+    startx
+fi
+

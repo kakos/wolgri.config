@@ -1,0 +1,5 @@
+source ~/.mutt/options
+source ~/.mutt/color
+source ~/.mutt/keys
+source ~/.mutt/gmail
+source ~/secret/mutt.gmail

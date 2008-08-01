@@ -1,0 +1,52 @@
+    !xev
+    !xmodmap -pm
+    !xmodmap -pke
+    !xmodmap -pk
+    !xbindkeys -f
+    !/usr/share/X11/XKeysymDB
+    !/usr/include/X11/keysymdef.h
+
+
+    keycode 160 = XF86AudioMute
+    keycode 174 = XF86AudioLowerVolume
+    keycode 176 = XF86AudioRaiseVolume
+    !keycode 133 = RupeeSign
+    keycode 133 = sterling
+    !keycode 14 = 5 percent sterling
+    keycode 232 = dollar
+
+    keycode 162 = XF86AudioPlay
+    keycode 164 = XF86AudioStop
+    keycode 144 = XF86AudioPrev
+    keycode 153 = XF86AudioNext
+
+    keycode 178 = XF86WWW
+    keycode 236 = XF86Mail
+
+    keycode 223 = XF86Sleep
+
+    keycode 123 = XF86BrightnessAdjust
+    keycode 239 = XF86BrightnessAdjust
+
+    ! Fn + F1
+    keycode 134 = XF86Search
+    ! Fn + F2
+    keycode 135 = XF86Start
+    ! Fn + F3
+    keycode 140 = XF86HomePage
+    ! Fn + F5 - Display Toggle
+    !keycode 191 =
+    ! Fn + F7 - Touchpad Disable
+    !keycode 192 =
+    ! Fn + F7 - Touchpad Enable
+    !keycode 122 =
+    ! Wireless
+    !keycode 188 =
+    !keycode 245 =
+    ! Bluetooth enable and disable
+    ! keycode 158 =
+    ! keycode 161 =
+    ! Acer Arcade Utility
+    keycode 159 = XF86Messenger
+    ! Acer Empowering Tech - reboot
+    keycode 227 = XF86PowerDown

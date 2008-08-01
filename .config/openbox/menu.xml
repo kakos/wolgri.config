@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/ file:///usr/share/openbox/menu.xsd">
+    <menu id="root-menu" label="Openbox 3">
+        <separator label="-=Gr!SHk@=-" /> 
+		<menu id="client-list-menu"/>
+        <separator/>
+       <menu id="root-menu-34" label="APPS">
+            <item label="-=SCREEN=-"> <action name="Execute"> <execute> /home/wolgri/scripts/screenTERM </execute> </action> </item>
+            <item label="Термінал"> <action name="Execute"> <execute> urxvt </execute> </action> </item>
+            <item label="WWW-firefox"> <action name="Execute"> <execute> firefox </execute> </action> </item>
+            <item label="Chat"> <action name="Execute"> <execute> pidgin </execute> </action> </item> 
+            <item label="Пошта"> <action name="Execute"> <execute> claws-mail </execute> </action> </item>
+            <item label="cd $HOME"> <action name="Execute"> <execute> pcmanfm </execute> </action> </item>
+        </menu>
+        <menu id="root-menu-342041" label="Work">
+            <item label="VirtualBox"> <action name="Execute"> <execute> VirtualBox </execute> </action> </item>
+            <item label="Viricad"> <action name="Execute"> <execute> varicad </execute> </action> </item>
+            <item label="ENVI"> <action name="Execute"> <execute> /home/wolgri/scripts/run_envi.sh </execute> </action> </item>
+        </menu>
+        <menu id="Debian" />
+		<separator/>
+		<item label="GTK-theme"> <action name="Execute"> <execute> gtk-chtheme </execute> </action> </item>
+		<item label="ObConf"> <action name="Execute"> <execute> obconf </execute> </action> </item>
+		<item label="Reconfigure"> <action name="Reconfigure"/> </item> <item label="Restart"> <action name="Restart"/> </item>
+		<separator/>
+		<item label="reboot"> <action name="Execute"> <execute> sudo reboot </execute> </action> </item>
+		<item label="poweroff"> <action name="Execute"> <execute> sudo poweroff </execute> </action> </item>
+		<item label="Exit"> <action name="Exit"/> </item> 
+    </menu> 
+</openbox_menu>

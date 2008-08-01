@@ -1,0 +1,147 @@
+! Gr!SHk@`s XTerm config
+*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
+XTerm*background: black
+XTerm*foreground: orange 
+XTerm*colorAttrMode: on
+XTerm*eightBitInput:   true
+XTerm*metaSendsEscape: true
+XTerm*geometry: 50x25
+
+! URXVT Colors
+URxvt*background:       gray25 
+URxvt*foreground:       gray90
+!Black text
+URxvt*color0:           gray10
+URxvt*color8:           gray15
+!Red text
+URxvt*color1:           red
+URxvt*color9:           red2
+!Green text
+URxvt*color2:           green
+URxvt*color10:          green2
+!Yellow text
+URxvt*color3:           yellow
+URxvt*color11:          yellow1
+!Blue text
+URxvt*color4:           royal blue
+URxvt*color12:          dodger blue
+!Magenta text
+URxvt*color5:           magenta2
+URxvt*color13:          magenta
+!Cyan text
+URxvt*color6:           cyan2
+URxvt*color14:          cyan3
+!White
+URxvt*color7:           white
+URxvt*color15:          gray70
+
+!URxvt*termName: xterm-color
+URxvt*fading: 30
+URxvt*faseColor: black
+URxvt*name: Terminal
+URxvt*title: Terminal
+! URxvt setings
+URxvt.geometry: 80x30
+URxvt.scrollBar:        false
+URxvt.xftAntialias:     true
+URxvt.font: xft:Terminus:style=Regular:pixelsize=14
+
+! URxvt.perl-ext:mark-urls,default
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 4
+URxvt.tabbed.tab-fg: 0
+URxvt.tabbed.tab-bg: 4    
+Urxvt.inheritPixmap:    false
+URxvt.transparen: true
+URxvt.tintColor:white
+URxvt.shading: 30
+! URxvt.urlLauncher: /usr/bin/firefox
+URxvt.jumpScroll:               True
+URxvt.scrollstyle:              plain
+URxvt.loginShell:               False
+URxvt.scrollBar_floating:       False
+URxvt.scrollTtyOutput:          False
+URxvt.scrollTtyKeypress:        True
+URxvt.scrollWithBuffer:         True
+URxvt.saveLines:                5000
+URxvt.internalBorder:           0 
+URxvt.externalBorder:           0
+URxvt.cursorBlink:              True
+URxvt.visualBell:               False
+!URxvt*imLocale:                 en_US.UTF-8
+
+! Other
+xmessage*font:  -*-fixed-medium-*-*-*-16-*-*-*-*-*-*-*
+Xcursor.size: 16
+Xcursor.theme: redglass
+xosview*font: -*-clean-*-*-normal-*-12-*-*-*-*-*-iso10646-*
+xosview*title: xosview
+xosview*captions: False
+xosview*labels: True
+xosview*usedlabels: True
+xosview*borderwidth: 10
+xosview*foreground: white
+xosview*transparent: True
+xosview*meterLabelColor: #4e778f
+xosview*background: #293034
+xosview*geometry: 150x128+0+0
+xosview*usedLabelColor: #FFFFFF
+
+xosview*cpuUserColor: black
+xosview*cpuNiceColor: #DEB999
+xosview*cpuSystemColor: red
+xosview*cpuInterruptColor: #ffe4b5
+xosview*cpuFreeColor: #293034
+xosview*cpuDecay: True
+xosview*cpuGraph: True
+xosview*cpuPriority: 2
+xosview*cpuUsedFormat: percent
+
+xosview*memUsedFormat: percent
+xosview*memFreeColor: #293034
+xosview*memInactiveColor: #edef63
+xosview*memUsedColor: #edef63
+xosview*memBufferColor: #C5DE99
+xosview*memCacheColor: #293034
+xosview*memSharedColor: #99b0de
+xosview*memTextColor: #99b0de
+xosview*memOtherColor: #99b0de
+xosview*memActiveColor: #99b0de
+xosview*memGraph: True
+xosview*memDecay: False
+
+
+xosview*netIface: eth0
+xosview*netBackground: #293034
+xosview*netInColor: #64d879
+xosview*netOutColor: #e24f4f
+xosview*netDecay: true
+xosview*netGraph: true
+xosview*netBandwidth: 50000000
+
+xosview*swapFreeColor: #293034
+xosview*swapUsedColor: #7ec0ee
+
+xosview*diskIdleColor: #293034
+xosview*diskReadColor: #b5aeff
+xosview*diskWriteColor: #b5aeff
+xosview*diskUsedColor: #b5aeff
+xosview*diskGraph: True
+xosview*diskDecay: True
+
+xosview*battery: False
+xosview*gfx: False
+xosview*net: True
+xosview*page: Flase
+xosview*disk: True
+xosview*interrupts: False
+xosview*load: True 
+xosview*swap: True
+xosview*lmstemp: False
+xosview*cpu: True
+xosview*mem: True
+!Xft.dpi: 96
+!Xft.hinting: 1
+!Xft.antialias: True
+!Xft.hintstyle: hintfull
+!Xft.rgba: rgb

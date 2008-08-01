@@ -1,0 +1,25 @@
+alias rm="rm -i"
+alias ls='ls --color'
+alias dir='ls --color --format=vertical'
+alias ll='ls -lha'
+alias la='ls -A'
+alias l='ls -CF'
+alias cdd="cd .."
+alias lss="ls -shaC"
+alias r='fc -s'
+alias o="netstat -tuael --numeric-hosts --numeric-ports"
+alias lsnet="sudo lsof -i4 -P -T"
+alias du="du -h"
+alias df="df -h"
+alias h="history 24"
+alias ssu="sudo bash"
+alias d='dirs -v'
+alias pst='pstree -G |more'
+alias toprun="ps axo %cpu,%mem,comm |sort -unr| head -n 9"
+alias psaux="ps aux"
+alias ps_top="ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
+alias lls='ls -ahl $1 | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al $1 | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
+
+alias cxwine="/home/grishka/stuff/cxoffice/bin/wine"
+alias weather="clweather -s UKKK"
+alias muttgmail="mutt -F $HOME/.mutt/muttrc.gmail"

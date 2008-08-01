@@ -1,0 +1,13 @@
+# ~/.bashrc
+#function rename_screen_tab () { echo -ne "\x1bk$@\x1b\\"; return 0; }
+
+eval `dircolors -b ~/.dircolors`
+
+
+
+if [[ ${EUID} == 0 ]] ; then
+	PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[0m\] '
+else
+    PS1="\[\033[0;33m\]\u@\h\[\033[01;34m\] \W \n\$ \[\033[0m\]"
+fi
+

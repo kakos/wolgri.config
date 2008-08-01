@@ -1,0 +1,13 @@
+set realname="Volodymer Grigorenko"
+mailboxes !
+set mbox="$HOME/.Maildir"
+set spoolfile="$HOME/.Maildir"
+set record="$HOME/.Maildir/.send"        #send mail is saved here
+set folder = $HOME/.Maildir
+save-hook .* =.INBOX.pers 
+mailboxes `find $HOME/.Maildir -type d | egrep -v '(/new|/tmp|/cur)' | sort | xargs`
+# subscriptions
+unlists *
+lists `find $HOME/.Maildir -name 'list.*' -type d | awk -F/ '{print $NF}' | egrep -v '(new|tmp|cur|lists)' | tr "\012" " "`
+unsubscribe *
+subscribe `find $HOME/.Maildir -name 'list.*' -type d | awk -F/ '{print $NF}' | egrep -v '(new|tmp|cur|lists)' | tr "\012" " "`

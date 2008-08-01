@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#Synaptic
+syndaemon -d 
+synclient HorizTwoFingerScroll=0
+synclient VertTwoFingerScroll=0
+synclient HorizEdgeScroll=0
+synclient VertEdgeScroll=0
+synclient CircularScrolling=0
+
+xsetroot -solid '#222222' -cursor_name left_ptr &
+nitrogen --restore
+unclutter -root -idle 5 &
+x11vnc -usepw -shared -forever > /dev/null &
+xscreensaver > /dev/null
