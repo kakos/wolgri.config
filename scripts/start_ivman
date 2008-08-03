@@ -1,0 +1,11 @@
+#!/bin/sh
+exec 1>&2
+echo -n "Launching volume manager... "
+if ps -C ivman -o user | grep -q $USER
+then
+  echo "Already running."
+  exit
+else
+  echo "OK"
+  exec ivman
+fi

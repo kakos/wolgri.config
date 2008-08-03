@@ -1,0 +1,1 @@
+cd ~/etc/xkb && xkbcomp three_groups.keymap $DISPLAY

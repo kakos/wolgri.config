@@ -1,0 +1,2 @@
+#!/bin/bash
+wvWare -x /usr/share/wv/wvHtml.xml $1 2>/dev/null | w3m -T text/html

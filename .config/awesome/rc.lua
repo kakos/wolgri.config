@@ -426,6 +426,7 @@ keybinding( {none}, "XF86HomePage", function () awful.spawn("sudo cpufreq-set -g
 keybinding( {none}, "XF86Start", function () awful.spawn("sudo cpufreq-set -g powersave") end):add()
 keybinding( {none}, "XF86WWW", function () awful.spawn("swiftfox") end):add()
 keybinding( {none}, "XF86Mail", function () awful.spawn("urxvt -e mutt") end):add()
+keybinding( {none}, "XF86PowerDown", function () awful.spawn("9menusudo") end):add()
 
 --}}}
 
@@ -437,7 +438,7 @@ keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
 
 --{{{ Client manipulation
 keybinding({ modkey }, "F5", awful.client.maximize):add()
-keybinding({ modkey, "Shift" }, "c", function () client.focus_get():kill() end):add()
+keybinding({ modkey }, "w", function () client.focus_get():kill() end):add()
 keybinding({ modkey }, "Left", function () awful.client.focusbyidx(1); client.focus_get():raise() end):add()
 keybinding({ modkey }, "Right", function () awful.client.focusbyidx(-1);  client.focus_get():raise() end):add()
 keybinding({ modkey, "Shift" }, "Left", function () awful.client.swap(1) end):add()

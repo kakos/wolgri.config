@@ -1,0 +1,4 @@
+#!/bin/sh
+filemanager=thunar
+file=$1
+$filemanager $HOME/mount/avfs$PWD/$file#/

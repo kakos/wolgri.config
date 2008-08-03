@@ -1,0 +1,4 @@
+archmage -p 8888 "$1" & links2 -g  http://127.0.0.1:8888 &
+
+wait `pidof links2` 
+killall archmage
