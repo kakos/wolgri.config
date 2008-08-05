@@ -183,7 +183,7 @@ max_value = 100
 
 
 wicked.register(volumewidget, 'vol', function (widget, args)
-   local v = io.popen("amixer sget PCM |grep 'Left: Playback'|sed -e 's/[\[,%]/ /g'")
+   local v = io.popen("amixer sget Master |grep 'Left: Playback'|sed -e 's/[\[,%]/ /g'")
 
     for line in v:lines() do
         line = splitbywhitespace(line)
@@ -414,9 +414,9 @@ end
 keybinding({ modkey }, "Escape", awful.tag.history.restore):add()
 --{{{ Fn keys 
 
-keybinding( {none}, "XF86AudioMute", function () awful.spawn("amix -c 0 set PCM toggle") end):add()
-keybinding( {none}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -c 0 set PCM 2dB+") end):add()
-keybinding( {none}, "XF86AudioLowerVolume", function () awful.spawn("amixer -c 0 set PCM 2dB-") end):add()
+keybinding( {none}, "XF86AudioMute", function () awful.spawn("amix -c 0 set Master toggle") end):add()
+keybinding( {none}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -c 0 set Master 2dB+") end):add()
+keybinding( {none}, "XF86AudioLowerVolume", function () awful.spawn("amixer -c 0 set Master 2dB-") end):add()
 keybinding( {none}, "XF86AudioPlay", function () awful.spawn("mpc toggle") end):add()
 keybinding( {none}, "XF86AudioNext", function () awful.spawn("mpc next") end):add()
 keybinding( {none}, "XF86AudioStop", function () awful.spawn("mpc stop ") end):add()
@@ -647,12 +647,13 @@ function hook_arrange(screen)
 end
 
 -- Set up some hooks
-awful.hooks.focus(hook_focus)
-awful.hooks.unfocus(hook_unfocus)
-awful.hooks.marked(hook_marked)
-awful.hooks.unmarked(hook_unmarked)
-awful.hooks.manage(hook_manage)
-awful.hooks.mouseover(hook_mouseover)
-awful.hooks.arrange(hook_arrange)
+awful.hooks.focus.register(hook_focus)
+awful.hooks.unfocus.register(hook_unfocus)
+awful.hooks.marked.register(hook_marked)
+awful.hooks.unmarked.register(hook_unmarked)
+awful.hooks.manage.register(hook_manage)
+awful.hooks.mouseover.register(hook_mouseover)
+awful.hooks.arrange.register(hook_arrange)
+--awful.hooks.timer.register(1, hook_timer)
 -- }}}
 -- vim: set filetype=lua fdm=marker tabstop=4 shiftwidth=4 expandtab smarttab autoindent smartindent nu:
