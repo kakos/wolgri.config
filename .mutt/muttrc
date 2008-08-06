@@ -1,5 +1,0 @@
-source ~/.mutt/options
-source ~/.mutt/colors.default
-source ~/.mutt/local
-source ~/.mutt/keys
-source ~/secret/mutt.local
