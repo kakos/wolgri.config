@@ -1,7 +1,7 @@
 export OOO_FORCE_DESKTOP=gnome
 export DISPLAY=":0"
 export PATH=$PATH:$HOME/bin:$HOME/scripts:/usr/games
-
+export FLASH_FORCE_PULSEAUDIO="1"
 export LANG=uk_UA.UTF-8
 export LC_ALL=uk_UA.UTF-8
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0

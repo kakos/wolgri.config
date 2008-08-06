@@ -4,13 +4,15 @@
 require("awful")
 require("tabulous")
 require("wicked")
-
+require("beautiful")
 -- Uncomment this to activate autotabbing
 -- tabulous.autotab_start()
 
 -- {{{ Variable definitions
 -- This is used later as the default terminal to run.
 terminal = "urxvt"
+-- This is a file path to a theme file which will defines colors.
+theme_path = "/home/wolgri/.config/awesome/theme"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -39,22 +41,21 @@ floatings =
     ["mplayer"] = true,
     ["pinentry"] = true
 }
+-- {{{ Theme
+-- Initialize theme (colors).
+beautiful.init(theme_path)
+
+-- Register theme in awful.
+-- This allows to not pass plenty of arguments to each function
+-- to inform it about colors we want it to draw.
+awful.beautiful.register(beautiful)
+
+-- Uncomment this to activate autotabbing
+-- tabulous.autotab_start()
+-- }}}
 
 -- Color & Appearance definitions, we use these later to display things
 font = "sans 8"
-border_width = 1
-
-bg_normal = "#222222"
-fg_normal = "#aaaaaa"
-border_normal = "#000000"
-
-bg_focus = "#535d6c"
-fg_focus = "#ffffff"
-border_focus = bg_focus
-border_marked = "#91231C"
-
-bg_urgent = "#ff0000"
-fg_urgent = "#ffffff"
 
 -- Define if we want to use titlebar on all applications
 use_titlebar = false
@@ -69,19 +70,19 @@ awesome.colors_set({ fg = fg_normal, bg = bg_normal })
 tags = {}
 tags[1]= {}
 tags[1][1] = tag({ name = "main", layout = layouts[1] })
-tags[1][1].mwfact = 0.618033988769
+tags[1][1].mwfact = 0.5
 tags[1][1].screen = 1
 
 tags[1][2] = tag({ name = "www", layout = layouts[1] })
-tags[1][2].mwfact = 0.618033988769
+tags[1][2].mwfact = 0.5
 tags[1][2].screen = 1
 
 tags[1][3] = tag({ name = "stuff", layout = layouts[1] })
-tags[1][3].mwfact = 0.618033988769
+tags[1][3].mwfact = 0.6
 tags[1][3].screen = 1
 
 tags[1][4] = tag({ name = "etc", layout = layouts[1] })
-tags[1][4].mwfact = 0.618033988769
+tags[1][4].mwfact = 0.6
 tags[1][4].screen = 1
 
 tags[1][1].selected = true
@@ -112,6 +113,7 @@ tb_space= widget({ type = 'textbox', name = 'tb_space'})
 tb_space.width = "4"
 tb_space.text = " "
 --}}}
+
 --{{{ Batt
 battarywidget = widget({ type = 'progressbar', name = 'battarywidget' })
 battarywidget.width = 40
@@ -560,14 +562,14 @@ end
 -- Hook function to execute when focusing a client.
 function hook_focus(c)
     if not awful.client.ismarked(c) then
-        c.border_color = border_focus
+        c.border_color = beautiful.border_focus
     end
 end
 
 -- Hook function to execute when unfocusing a client.
 function hook_unfocus(c)
     if not awful.client.ismarked(c) then
-        c.border_color = border_normal
+        c.border_color = beautiful.border_normal
     end
 end
 
