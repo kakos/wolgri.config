@@ -1,0 +1,131 @@
+source ~/secret/mutt.gmail
+
+set pager_context=1    
+set pager_index_lines=6                 #show a mini-index in pager
+set menu_scroll  
+set status_on_top                       #put status line at top 
+set sort=threads                        #sort by message threads in index
+
+set status_format=" %r %b %f %n      Del %d      Msgs %m %l %> (%P)"
+set pager_format="%-10.10i %[!%a %b %d %R]"
+set date_format="!%H:%M %a %d %b     "   
+#set index_format="%4C %Z %[%b%d] %-15.15F %s" 
+set folder_format="%2C %t %8s %d %N %f" 
+set index_format="%4C %Z %M %{%b %d} %-20.20n %s" 
+set pager_index_lines=6
+
+set delete=yes                          #delete without prompting
+set include=yes             #quote msg in reply 
+set fast_reply=yes          #no prompting on reply
+set beep=no             #no noise
+set markers=no              #no + on wrapped lines
+set confirmappend=no            #no prompt for save to =keep    
+set to_chars=" +TCF"                    #no L for mail_list
+
+set date_format="!%H:%M %a %d %b     "   
+set use_8bitmime
+set assumed_charset="utf8"
+set charset="utf8"
+
+# default list of header fields to weed out when displaying mail
+#ignore them all and then unignore what you want to see 
+ignore *
+unignore  Date To From: Subject X-Mailer Organization User-Agent List-Post List-Id
+hdr_order Date From To Subject X-Mailer User-Agent Organization List-Post List-Id
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Color definitions
+#
+
+color normal white default
+color hdrdefault red default
+color header brightred default ^(From|Subject):
+
+color hdrdefault  brightgreen default
+color header      brightblue  default  "^date: *"
+color header      yellow   default  "^from: *"
+color header      green    default  "^subject: *"
+color header      cyan     default  "^to: *"
+color header      cyan     default  "^delivered-to: *"
+color header      cyan     default  "^cc: *"
+color header      cyan     default  "^bcc: *"
+color header      yellow   default  "^reply-to: *"
+color header      yellow   default  "^mail-followup-to: *"
+color header      yellow   default  "^old-return-path: *"
+color header      magenta default "^x-mailer: *"
+color header      magenta default "^user-agent: *"
+color header      magenta default "^x-operating-system: *"
+color header      cyan      default  "^x-mailing-list: *"
+color header      blue      default  "^in-reply-to: *"
+
+color quoted brightblue default
+color quoted1 green default
+color quoted2 yellow default
+color signature red default
+color indicator blue white
+color error brightred default
+color status green default
+color tree red default
+color tilde magenta default
+color message brightcyan default
+color markers brightcyan default
+color attachment green default
+color search default green
+color index green default ~N
+
+color body magenta default "(ftp|http)://[^ ]+"
+color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
+color underline brightgreen default
+
+#color sidebar_new yellow default
+
+# sidebar shortcuts
+macro index \CN ':push <sidebar-next-new><enter>'
+macro pager \CN ':push <sidebar-next-new><enter>'
+macro index \CW ':push <sidebar-next><enter>'
+macro pager \CW ':push <sidebar-next><enter>'
+macro index \CO ':push <sidebar-open><enter>'
+macro pager \CO ':push <sidebar-open><enter>'
+macro index \CP ':push <sidebar-prev-new><enter>'
+macro pager \CP ':push <sidebar-prev-new><enter>'
+macro index \CR ':push <sidebar-prev><enter>'
+macro pager \CR ':push <sidebar-prev><enter>'
+macro index S ':toggle sidebar_visible^M'
+macro pager S ':toggle sidebar_visible^M'
+macro compose S ':toggle sidebar_visible^M'
+macro index Q ':toggle sidebar_newmail_only^M'
+macro pager Q ':toggle sidebar_newmal_only^M'
+macro compose Q ':toggle sidebar_newmail_only^M'
+macro index \cb '|urlview<enter>'
+macro pager \cb '|urlview<enter>'
+
+### 
+#set imap_user = 'USERNAME@[domain]'
+#set smtp_url="smtps://USERNAME@[domain]:PASSWORD@smtp.gmail.com/"
+#set imap_pass = 'PASSWORD'
+#set from = 'EMAIL@address'
+
+set realname="Volodymer Grigorenko"
+set folder = "imaps://imap.gmail.com/"
+set record="imaps://imap.gmail.com/[Google Mail]/Sent Mail"
+set postponed="imaps://imap.gmail.com/[Google Mail]/Drafts"
+set spoolfile = "+INBOX"
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+set imap_check_subscribed
+
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+set move = no
+
+bind index "y" imap-fetch-mail
+bind index "l" display-message
+bind pager "h" exit
