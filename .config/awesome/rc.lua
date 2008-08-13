@@ -52,8 +52,8 @@ floatapps =
 -- Use the screen and tags indices.
 apptags =
 {
-    -- ["Firefox"] = { screen = 1, tag = 2 },
-    -- ["mocp"] = { screen = 2, tag = 4 },
+     ["Swiftfox"] = { screen = 1, tag = 2 },
+     ["lilyterm"] = { screen = 1, tag = 1 },
 }
 
 -- Define if we want to use titlebar on all applications.
@@ -79,18 +79,32 @@ awful.prompt.history.set()
 -- {{{ Tags
 -- Define tags table.
 tags = {}
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = {}
-    -- Create 9 tags per screen.
-    for tagnumber = 1, 9 do
-        tags[s][tagnumber] = tag({ name = tagnumber, layout = layouts[1] })
-        -- Add tags to screen one by one
-        tags[s][tagnumber].screen = s
-    end
-    -- I'm sure you want to see at least one tag.
-    tags[s][1].selected = true
-end
+tags[1]= {}
+tags[1][1] = tag({ name = "main", layout = layouts[1] })
+tags[1][1].mwfact = 0.5
+tags[1][1].screen = 1
+
+tags[1][2] = tag({ name = "www", layout = layouts[1] })
+tags[1][2].mwfact = 0.5
+tags[1][2].screen = 1
+
+tags[1][3] = tag({ name = "stuff", layout = layouts[1] })
+tags[1][3].mwfact = 0.6
+tags[1][3].screen = 1
+
+tags[1][4] = tag({ name = "work", layout = layouts[1] })
+tags[1][4].mwfact = 0.6
+tags[1][4].screen = 1
+
+tags[1][5] = tag({ name = "virt", layout = layouts[4] })
+tags[1][5].mwfact = 0.6
+tags[1][5].screen = 1
+
+tags[1][6] = tag({ name = "etc", layout = layouts[4] })
+tags[1][6].mwfact = 0.6
+tags[1][6].screen = 1
+
+tags[1][1].selected = true
 -- }}}
 
 -- {{{ Statusbar

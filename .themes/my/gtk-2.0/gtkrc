@@ -29,13 +29,13 @@ style "my-default"
     fg[SELECTED] = "white" # White
     fg[NORMAL] = "gray80" # Light Gray
     fg[PRELIGHT] = "white" # White
-    fg[INSENSITIVE] = "black" # 3D Shadow
+    fg[INSENSITIVE] = "gray60" # 3D Shadow
 
     bg[ACTIVE] = "gray30" # Dark Gray
     bg[SELECTED] = "gray80" # Dark Gray
     bg[NORMAL] = "gray20" # Basic 3D Hilight
     bg[PRELIGHT] = "gray35" # Gray Hilight
-    bg[INSENSITIVE] = "gray80" # Basic 3D Hilight
+    bg[INSENSITIVE] = "gray40" # Basic 3D Hilight
 
     base[ACTIVE] = "gray10" # Basic 3D Dark
     base[SELECTED] = "gray80" # Dark Gray
@@ -47,7 +47,7 @@ style "my-default"
     text[SELECTED] = "black" # Light Gray
     text[NORMAL] = "gray80" # Black
     text[PRELIGHT] = "white" # White
-    text[INSENSITIVE] = "gray10" # 3D Shadow
+    text[INSENSITIVE] = "gray50" # 3D Shadow
 
   engine "hcengine"
   {
