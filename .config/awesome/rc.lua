@@ -1,5 +1,6 @@
 -- awesome 3 configuration file
-
+-- Define if we want to use titlebar on all applications.
+use_titlebar = false
 -- Include awesome library, with lots of useful function!
 require("awful")
 require("tabulous")
@@ -8,7 +9,7 @@ require("wicked")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/usr/local/share/awesome/themes/default"
+theme_path = "/home/wolgri/.config/awesome/default"
 
 -- This is used later as the default terminal to run.
 terminal = "urxvt"
@@ -20,21 +21,17 @@ terminal = "urxvt"
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
+--{{{ Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
     "tile",
---    "tileleft",
---    "tilebottom",
     "tiletop",
---    "magnifier",
     "max",
---    "spiral",
---    "dwindle",
     "floating"
 }
+--}}}
 
--- Table of clients that should be set floating. The index may be either
+--{{{ Table of clients that should be set floating. The index may be either
 -- the application class or instance. The instance is useful when running
 -- a console app in a terminal like (Music on Console)
 --    xterm -name mocp -e mocp
@@ -47,17 +44,18 @@ floatapps =
     -- by instance
     ["mocp"] = true
 }
+--}}}
 
--- Applications to be moved to a pre-defined tag by class or instance.
+--{{{ Applications to be moved to a pre-defined tag by class or instance.
 -- Use the screen and tags indices.
 apptags =
 {
      ["Swiftfox"] = { screen = 1, tag = 2 },
      ["lilyterm"] = { screen = 1, tag = 1 },
-}
+     ["vmware"] = { screen = 1, tag = 5 },
 
--- Define if we want to use titlebar on all applications.
-use_titlebar = false
+}
+--}}}
 -- }}}
 
 -- {{{ Initialization
@@ -96,7 +94,7 @@ tags[1][4] = tag({ name = "work", layout = layouts[1] })
 tags[1][4].mwfact = 0.6
 tags[1][4].screen = 1
 
-tags[1][5] = tag({ name = "virt", layout = layouts[4] })
+tags[1][5] = tag({ name = "virt", layout = layouts[3] })
 tags[1][5].mwfact = 0.6
 tags[1][5].screen = 1
 
