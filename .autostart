@@ -7,7 +7,9 @@ synclient VertTwoFingerScroll=0
 synclient HorizEdgeScroll=0
 synclient VertEdgeScroll=0
 synclient CircularScrolling=0
-
+nitrogen --restore
+sleep 4 ;
+lilyterm&
 xsetroot -solid '#222222' -cursor_name left_ptr &
 nitrogen --restore
 unclutter -root -idle 5 &
