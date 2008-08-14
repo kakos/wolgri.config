@@ -10,7 +10,7 @@ synclient CircularScrolling=0
 nitrogen --restore
 sleep 4 ;
 lilyterm&
-xsetroot -solid '#222222' -cursor_name left_ptr &
+setroot -solid '#222222' -cursor_name left_ptr &
 nitrogen --restore
 unclutter -root -idle 5 &
 x11vnc -usepw -shared -forever > /dev/null &
