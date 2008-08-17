@@ -5,7 +5,6 @@ use_titlebar = false
 require("awful")
 require("tabulous")
 require("beautiful")
-require("wicked")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
@@ -149,22 +148,34 @@ mhzwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
 --}}}
 --{{{ Cpu
 
-cpugraphwidget = widget({ type = 'graph', name = 'cpugraphwidget', align = 'right' }) 
-cpugraphwidget.height = 0.95
-cpugraphwidget.width = 45
-cpugraphwidget.bg = '#333333'
-cpugraphwidget.border_color = 'gray80'
-cpugraphwidget.grow = 'left'
+cpu0graphwidget = widget({ type = 'graph', name = 'cpu0graphwidget', align = 'right' }) 
+cpu0graphwidget.height = 0.95
+cpu0graphwidget.width = 45
+cpu0graphwidget.bg = '#333333'
+cpu0graphwidget.border_color = 'gray80'
+cpu0graphwidget.grow = 'left'
 
-cpugraphwidget:plot_properties_set('cpu', { 
+cpu0graphwidget:plot_properties_set('cpu', { 
 fg = 'red2',
 style ='line',
 fg_center = 'green', 
 fg_end = 'cyan', 
 vertical_gradient = true 
 })
+cpu1graphwidget = widget({ type = 'graph', name = 'cpu1graphwidget', align = 'right' }) 
+cpu1graphwidget.height = 0.95
+cpu1graphwidget.width = 45
+cpu1graphwidget.bg = '#333333'
+cpu1graphwidget.border_color = 'gray80'
+cpu1graphwidget.grow = 'left'
 
-wicked.register(cpugraphwidget, 'cpu', '$1', 1, 'cpu')
+cpu1graphwidget:plot_properties_set('cpu', { 
+fg = 'red2',
+style ='line',
+fg_center = 'green', 
+fg_end = 'cyan', 
+vertical_gradient = true 
+})
 --}}}
 --{{{MeM 
 membarwidget = widget({ type = 'progressbar', name = 'membarwidget', align = 'right' })
@@ -212,10 +223,6 @@ reverse = false,
 min_value = 0,
 max_value = 100
 })
-
-wicked.register(lqbarwidget, 'wlan', '${lq}', 1, 'lq')
-
-
 ratewidget = widget({ type = 'textbox', name = 'ratewidget',align = 'right' })
 
 
@@ -272,8 +279,9 @@ for s = 1, screen.count() do
         tb_spacer,
         mhzwidget,
         tb_spacer,
-        cpugraphwidget,
-        tb_spacer,
+        cpu0graphwidget, tb_spacer,
+        cpu1graphwidget, tb_spacer,
+
         membarwidget,
         tb_spacer,
         essidwidget,
@@ -476,6 +484,55 @@ end
 -- }}}
 
 -- {{{ Hooks
+--{{{ cpu
+cpu0_total = 0
+cpu0_active = 0
+cpu1_total = 0
+cpu1_active = 0
+
+function get_cpu()
+    -- Return CPU usage percentage
+    ---- Get /proc/stat
+    local f = io.open('/proc/stat')
+    for l in f:lines() do
+    cpu_usage = splitbywhitespace(l)
+    if cpu_usage[1] == "cpu0" then
+            ---- Calculate totals
+            total_new = cpu_usage[2]+cpu_usage[3]+cpu_usage[4]+cpu_usage[5]
+            active_new = cpu_usage[2]+cpu_usage[3]+cpu_usage[4]
+            
+            ---- Calculate percentage
+            diff_total = total_new-cpu0_total
+            diff_active = active_new-cpu0_active
+            usage_percent = math.floor(diff_active/diff_total*100)
+
+            ---- Store totals
+            cpu0_total = total_new
+            cpu0_active = active_new
+            
+            cpu0graphwidget:plot_data_add("cpu",usage_percent)
+     elseif cpu_usage[1] == "cpu1" then
+            ---- Calculate totals
+            total_new = cpu_usage[2]+cpu_usage[3]+cpu_usage[4]+cpu_usage[5]
+            active_new = cpu_usage[2]+cpu_usage[3]+cpu_usage[4]
+            
+            ---- Calculate percentage
+            diff_total = total_new-cpu1_total
+            diff_active = active_new-cpu1_active
+            usage_percent = math.floor(diff_active/diff_total*100)
+
+            ---- Store totals
+            cpu1_total = total_new
+            cpu1_active = active_new
+
+            cpu1graphwidget:plot_data_add("cpu",usage_percent)
+        
+    end
+
+end
+f:close()
+end
+--}}} 
 --{{{ mem hook
 function get_mem()
   local mem_free, mem_total, mem_c, mem_b
@@ -731,6 +788,8 @@ awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
 awful.hooks.timer.register(1, hook_timer)
 awful.hooks.timer.register(1, get_mem)
+awful.hooks.timer.register(1, get_cpu)
+
 awful.hooks.timer.register(1, get_mhz)
 awful.hooks.timer.register(5, update_iwinfo)
 awful.hooks.timer.register(5, get_bat)
