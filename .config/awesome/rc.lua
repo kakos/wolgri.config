@@ -189,7 +189,6 @@ min_value = 0,
 max_value = 100
 })
 
-wicked.register(membarwidget, 'mem', '$1', 1, 'mem')
 --}}}
 --{{{ Wifi
 essidwidget = widget({ type = 'textbox', name = 'essidwidget',align = 'right' })
@@ -357,8 +356,8 @@ keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
 --{{{ Fn keys 
 
 keybinding( {none}, "XF86AudioMute", function () awful.spawn("amix -c 0 set Master toggle") end):add()
-keybinding( {none}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -c 0 set Master 2dB+") end):add()
-keybinding( {none}, "XF86AudioLowerVolume", function () awful.spawn("amixer -c 0 set Master 2dB-") end):add()
+keybinding( {none}, "XF86AudioRaiseVolume", function () awful.spawn("amixset +") end):add()
+keybinding( {none}, "XF86AudioLowerVolume", function () awful.spawn("amixset -") end):add()
 keybinding( {none}, "XF86AudioPlay", function () awful.spawn("mpc toggle") end):add()
 keybinding( {none}, "XF86AudioNext", function () awful.spawn("mpc next") end):add()
 keybinding( {none}, "XF86AudioStop", function () awful.spawn("mpc stop ") end):add()
@@ -477,6 +476,37 @@ end
 -- }}}
 
 -- {{{ Hooks
+--{{{ mem hook
+function get_mem()
+  local mem_free, mem_total, mem_c, mem_b
+  local mem_percent, swap_percent, line, fh, count
+  count = 0
+
+  fh = io.open("/proc/meminfo")
+
+  line = fh:read()
+  while line and count < 4 do
+    if line:match("MemFree:") then
+      mem_free = string.match(line, "%d+")
+      count = count + 1;
+    elseif line:match("MemTotal:") then
+      mem_total = string.match(line, "%d+")
+      count = count + 1;
+    elseif line:match("Cached:") then
+      mem_c = string.match(line, "%d+")
+      count = count + 1;
+    elseif line:match("Buffers:") then
+      mem_b = string.match(line, "%d+")
+      count = count + 1;
+    end
+    line = fh:read()
+  end
+  io.close(fh)
+
+  mem_percent = 100 * (mem_total - mem_free - mem_b - mem_c ) / mem_total;
+ membarwidget:bar_data_add("mem",mem_percent)
+end
+--}}}
 --{{{ mhz hook
 function get_mhz()
     local m = io.popen("cat /proc/cpuinfo|grep MHz|uniq|awk '{print ($4)/1000}'")
@@ -488,7 +518,7 @@ function get_mhz()
 mhzwidget.text =""..mhz..""
 end 
 --}}} 
---{{{ wifi hooks
+--{{{ wifi hook
 
 local function get_iwinfo_iwcfg()
     local wlann="wlan0"
@@ -529,7 +559,7 @@ lqbarwidget:bar_data_add("lq",linkq )
 
 end
 --}}}
---{{{ batt hooks
+--{{{ batt hook
 local function get_bat()
    local a = io.open("/sys/class/power_supply/BAT1/charge_full")
     for line in a:lines() do
@@ -700,6 +730,7 @@ awful.hooks.manage.register(hook_manage)
 awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
 awful.hooks.timer.register(1, hook_timer)
+awful.hooks.timer.register(1, get_mem)
 awful.hooks.timer.register(1, get_mhz)
 awful.hooks.timer.register(5, update_iwinfo)
 awful.hooks.timer.register(5, get_bat)
