@@ -67,9 +67,6 @@ beautiful.init(theme_path)
 -- to inform it about colors we want it to draw.
 awful.beautiful.register(beautiful)
 
--- Enable prompt history
-awful.prompt.history.set()
-
 -- Uncomment this to activate autotabbing
 -- tabulous.autotab_start()
 -- }}}
@@ -249,7 +246,6 @@ wicked.register(membarwidget, 'mem', '$1', 1, 'mem')
 --}}}
 --{{{ Wifi
 essidwidget = widget({ type = 'textbox', name = 'essidwidget',align = 'right' })
-wicked.register(essidwidget,'wlan','<bg color="red"/><span font_desc="sans bold 9" color="white">${essid}</span>')
 
 lqbarwidget = widget({ type = 'progressbar', name = 'lqbarwidget', align = 'right' })
 
@@ -275,7 +271,6 @@ wicked.register(lqbarwidget, 'wlan', '${lq}', 1, 'lq')
 
 
 ratewidget = widget({ type = 'textbox', name = 'ratewidget',align = 'right' })
-wicked.register(ratewidget, 'wlan', ' <span color="green"> ${rate}</span> mb/s')
 
 
 
@@ -449,12 +444,13 @@ keybinding({ modkey, "Shift" }, "space", function () awful.layout.inc(layouts, -
 -- }}}
 
 --{{{ Prompt
+
 keybinding({ modkey }, "F1", function ()
-                                 awful.prompt.run({ prompt = "Run: " }, mypromptbox, awful.spawn, awful.completion.bash)
-                             end):add()
+                                 awful.prompt.run({ prompt = "Run: " }, mypromptbox, awful.spawn, awful.completion.bash,
+os.getenv("HOME") .. "/.cache/awesome_history") end):add()
 keybinding({ modkey }, "F4", function ()
-                                 awful.prompt.run({ prompt = "Run Lua code: " }, mypromptbox, awful.eval)
-                             end):add()
+                                 awful.prompt.run({ prompt = "Run Lua code: " }, mypromptbox, awful.eval, awful.prompt.bash,
+os.getenv("HOME") .. "/.cache/awesome_history_eval") end):add()
 keybinding({ modkey, "Ctrl" }, "i", function ()
                                         if mypromptbox.text then
                                             mypromptbox.text = nil
@@ -527,7 +523,48 @@ end
 -- }}}
 
 -- {{{ Hooks
---
+--{{{ wifi hooks
+
+local function get_iwinfo_iwcfg()
+    local wlann="wlan0"
+	local f1 = io.popen("/sbin/iwconfig " .. wlann)
+	if not f1 then
+		return
+	else
+		local iwOut = f1:read('*a')
+		f1:close()
+		st,en,proto = string.find(iwOut, '(802.11[%-]*%a*)')
+		st,en,ssid = string.find(iwOut, 'ESSID[=:]"([%w+%s*]*)"', en)
+		st,en,bitrate = string.find(iwOut, 'Bit Rate[=:]([%s%w%.]*%/%a+)', en)
+		bitrate = string.gsub(bitrate, "%s", "")
+		st,en,linkq1,linkq2 = string.find(iwOut, 'Link Quality[=:](%d+)/(%d+)', en)
+		st,en,signal = string.find(iwOut, 'Signal level[=:](%-%d+)', en)
+		st,en,noise = string.find(iwOut, 'Noise level[=:](%-%d+)', en)
+        linkq = math.floor(100*linkq1/linkq2)
+		return proto, ssid, bitrate, linkq, signal, noise
+	end
+end
+
+local function update_iwinfo()
+	local proto, ssid, bitrate, linkq, signal, noise = get_iwinfo_iwcfg()
+
+-- In case get_iwinfo_iwcfg doesn't return any values we don't want stupid lua
+-- errors about concatenating nil values.
+	ssid = ssid or "N/A"
+	bitrate = bitrate or "N/A"
+	linkq = linkq or "N/A"
+	signal = signal or "N/A"
+	noise = noise or "N/A"
+	proto = proto or "N/A"
+
+essidwidget.text ="<bg color=\"red\"/><span font_desc=\"sans bold 9\" color=\"white\">"..ssid.."</span>"
+ratewidget.text = "<span color=\"green\">"..bitrate.."</span>"
+lqbarwidget:bar_data_add("lq",linkq )
+
+
+end
+--}}}
+
 -- {{{stolen from wicked.lua
 function splitbywhitespace(str) 
      values = {}
@@ -682,6 +719,7 @@ awful.hooks.manage.register(hook_manage)
 awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
 --awful.hooks.timer.register(1, hook_timer)
+awful.hooks.timer.register(5, update_iwinfo)
 -- }}}
 -- }}}
 
