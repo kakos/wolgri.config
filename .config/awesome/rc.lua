@@ -140,65 +140,12 @@ reverse = false,
 min_value = 0,
 max_value = 100
 })
-wicked.register(battarywidget, 'bat', function (widget, args)
-   local a = io.open("/sys/class/power_supply/BAT1/charge_full")
-    for line in a:lines() do
-            full = line
-       end 
-    a:close()
- local b = io.open("/sys/class/power_supply/BAT1/charge_now")
-    for line in b:lines() do
-            now = line
-       end 
-    b:close()
-batt=math.floor(now*100/full)
-return batt
-end, 2, 'bat')
+
 --}}}
 --{{{ Mhz
 mhzwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
-wicked.register(mhzwidget, 'mhz', function (widget, args)
-    local m = io.popen("cat /proc/cpuinfo|grep MHz|uniq|awk '{print ($4)/1000}'")
-      for line in m:lines() do
-            return (line)
-      end    
-
-    m:close()
-end, 1)
 
 
---}}}
---{{{ Volume
-volumewidget = widget({ type = 'progressbar', name = 'volumewidget' })
-volumewidget.width = 40
-volumewidget.height = 0.75
-volumewidget.gap = 0
-volumewidget.border_padding = 1
-volumewidget.border_width = 1
-volumewidget.ticks_count = 10
-volumewidget.ticks_gap = 1
-volumewidget.vertical = false
-volumewidget:bar_properties_set('vol', {
-bg = 'gray50',
-fg = 'green',
-fg_off = 'gray50',
-reverse = false,
-min_value = 0,
-max_value = 100
-})
-
-
-
-wicked.register(volumewidget, 'vol', function (widget, args)
-   local v = io.popen("amixer sget Master |grep 'Left: Playback'|sed -e 's/[\[,%]/ /g'")
-
-    for line in v:lines() do
-        line = splitbywhitespace(line)
-            vol = line[5]
-       end 
-    v:close()
-   return vol
-end, 2, 'vol')
 --}}}
 --{{{ Cpu
 
@@ -249,14 +196,14 @@ essidwidget = widget({ type = 'textbox', name = 'essidwidget',align = 'right' })
 
 lqbarwidget = widget({ type = 'progressbar', name = 'lqbarwidget', align = 'right' })
 
-lqbarwidget.width = 40
-lqbarwidget.height = 0.80
+lqbarwidget.width = 12
+lqbarwidget.height = 1
 lqbarwidget.gap = 0
 lqbarwidget.border_padding = 1
 lqbarwidget.border_width = 1
 lqbarwidget.ticks_count = 5
 lqbarwidget.ticks_gap = 1
-lqbarwidget.vertical = false
+lqbarwidget.vertical = true
 
 lqbarwidget:bar_properties_set('lq', {
 bg = 'gray20',
@@ -277,9 +224,6 @@ ratewidget = widget({ type = 'textbox', name = 'ratewidget',align = 'right' })
 --}}}
 --{{{Date
   datew = widget({type = 'textbox',name = 'datew',align = "right"  })
-  wicked.register(datew, 'date','<bg color="gray20"/> <span font_desc="sans bold 9" color="white">%a %d %b - %H:%M</span>')
-  datew:mouse_add(mouse({ }, 1, function () awful.spawn("wallswitch 1")end))
-  datew:mouse_add(mouse({ }, 2, function () awful.spawn("wallswitch 2") end))
 --}}}
 -- {{{Create a tasklist widget
 mytasklist = widget({ type = "tasklist", name = "mytasklist" })
@@ -322,12 +266,22 @@ for s = 1, screen.count() do
     mystatusbar[s].widgets =
     {
         battarywidget,
-        mytaglist,tb_space,volumewidget,tb_space,
+        mytaglist,
+        tb_space,
         mytasklist,
         mypromptbox,
-        tb_spacer,mhzwidget,tb_spacer,cpugraphwidget,tb_spacer,
-        membarwidget,tb_spacer,
-        essidwidget,tb_spacer,lqbarwidget,tb_spacer,ratewidget,
+        tb_spacer,
+        mhzwidget,
+        tb_spacer,
+        cpugraphwidget,
+        tb_spacer,
+        membarwidget,
+        tb_spacer,
+        essidwidget,
+        tb_spacer,
+        lqbarwidget,
+        tb_spacer,
+        ratewidget,
         datew,
 
         mylayoutbox[s],
@@ -523,6 +477,17 @@ end
 -- }}}
 
 -- {{{ Hooks
+--{{{ mhz hook
+function get_mhz()
+    local m = io.popen("cat /proc/cpuinfo|grep MHz|uniq|awk '{print ($4)/1000}'")
+      for line in m:lines() do
+            mhz = line
+      end    
+
+    m:close()
+mhzwidget.text =""..mhz..""
+end 
+--}}} 
 --{{{ wifi hooks
 
 local function get_iwinfo_iwcfg()
@@ -564,8 +529,37 @@ lqbarwidget:bar_data_add("lq",linkq )
 
 end
 --}}}
+--{{{ batt hooks
+local function get_bat()
+   local a = io.open("/sys/class/power_supply/BAT1/charge_full")
+    for line in a:lines() do
+            full = line
+       end 
+    a:close()
+ local b = io.open("/sys/class/power_supply/BAT1/charge_now")
+    for line in b:lines() do
+            now = line
+       end 
+    b:close()
+batt=math.floor(now*100/full)
+battarywidget:bar_data_add("bat",batt )
 
--- {{{stolen from wicked.lua
+end
+
+--}}}
+--{{{ date hook
+function hook_timer ()
+    local d= io.popen("date +\"%a %d %b - %H:%M\"")
+    for line in d:lines() do
+           sdate = line
+    end 
+    d:close()
+    datew.text = "<bg color=\"gray20\"/> <span font_desc=\"sans bold 9\" color=\"white\">"..sdate.. "</span>"
+    -- Otherwise use:
+    -- mytextbox.text = " " .. os.date() .. " "
+end
+-- }}}
+-- {{{ splitbywhitespace stolen from wicked.lua
 function splitbywhitespace(str) 
      values = {}
      start = 1
@@ -589,7 +583,6 @@ function splitbywhitespace(str)
      return values
 end
 --}}}
-
 --{{{ Hook function to execute when focusing a client.
 function hook_focus(c)
     if not awful.client.ismarked(c) then
@@ -622,7 +615,6 @@ function hook_mouseover(c)
     end
 end
 -- }}}
-
 --{{{ Hook function to execute when a new client appears.
 function hook_manage(c)
     -- Set floating placement to be smart!
@@ -666,7 +658,6 @@ function hook_manage(c)
     c.honorsizehints = true
 end
 -- }}}
-
 --{{{ Hook function to execute when arranging the screen
 -- (tag switch, new client, etc)
 function hook_arrange(screen)
@@ -700,16 +691,6 @@ function hook_arrange(screen)
     end
 end
 -- }}}
-
---{{{ Hook called every second
-function hook_timer ()
-    -- For unix time_t lovers
-    mytextbox.text = " " .. os.time() .. " time_t "
-    -- Otherwise use:
-    -- mytextbox.text = " " .. os.date() .. " "
-end
--- }}}
-
 --{{{ Set up some hooks
 awful.hooks.focus.register(hook_focus)
 awful.hooks.unfocus.register(hook_unfocus)
@@ -718,8 +699,11 @@ awful.hooks.unmarked.register(hook_unmarked)
 awful.hooks.manage.register(hook_manage)
 awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
---awful.hooks.timer.register(1, hook_timer)
+awful.hooks.timer.register(1, hook_timer)
+awful.hooks.timer.register(1, get_mhz)
 awful.hooks.timer.register(5, update_iwinfo)
+awful.hooks.timer.register(5, get_bat)
+
 -- }}}
 -- }}}
 
