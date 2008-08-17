@@ -1,4 +1,9 @@
--- awesome 3 configuration file
+-- Wolgri laptop  awesome 3 configuration file
+-- based on :
+-- http://modeemi.fi/~tuomov/repos/ion-scripts-3/statusd/statusd_iwinfo.lua
+-- http://www.calmar.ws/dotfiles/dotfiledir/awesome-status.lua
+-- http://git.glacicle.com/?p=wicked.git;a=summary
+
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
 -- Include awesome library, with lots of useful function!
@@ -634,7 +639,7 @@ battarywidget:bar_data_add("bat",batt )
 end
 
 --}}}
---{{{ date hook
+--{{{ date hook I want  date in Ukrainian   
 function hook_timer ()
     local d= io.popen("date +\"%a %d %b - %H:%M\"")
     for line in d:lines() do
