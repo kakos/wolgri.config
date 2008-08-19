@@ -1,3 +1,5 @@
+source ~/.vim/filetype.vim
+let git_diff_opts = "-C -C -w -b"
 " Theme
 if has("gui_running")
   colo   blackboard
