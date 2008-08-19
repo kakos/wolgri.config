@@ -44,6 +44,8 @@ floatapps =
     -- by class
     ["MPlayer"] = true,
     ["pinentry"] = true,
+    ["xvkbd"] = true,
+
     ["gimp"] = true,
     -- by instance
     ["mocp"] = true
@@ -768,7 +770,7 @@ function hook_arrange(screen)
     end
 
     -- Uncomment if you want mouse warping
-    
+    --[[ 
     local sel = client.focus
     if sel then
         local c_c = sel.coords
@@ -779,8 +781,8 @@ function hook_arrange(screen)
             if table.maxn(m_c.buttons) == 0 then
                 mouse.coords = { x = c_c.x + 5, y = c_c.y + 5}
             end
-        end
-    end
+        end 
+    end]]
 end
 -- }}}
 --{{{ Set up some hooks

@@ -1,3 +1,4 @@
+alias awesome-restart='echo "awesome.restart()"|awesome-client'
 alias rm="rm -i"
 alias ls='ls --color'
 alias dir='ls --color --format=vertical'

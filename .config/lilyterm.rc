@@ -1,0 +1,205 @@
+[main]
+
+# The page name used for a new page.
+page_name = Terminal
+
+# The page names list used for new pages, separate with space.
+page_names = 
+
+# Reuse the page name in the page names list.
+reuse_page_names = 1
+
+# Shows a (number no) on the page name.
+page_number = 1
+
+# Shows the foreground running command on the page name.
+page_shows_current_cmdline = 1
+
+# Shows current directory on the page name.
+page_shows_current_dir = 1
+
+# Shows the page name of current page on window title.
+window_shows_current_page = 1
+
+# The max character width of page name.
+page_width = 20
+
+# The page width will always use the max character width.
+fixed_page_width = 1
+
+# Use colorful page text.
+use_color_page = 1
+
+# The color used for showing cmdline on page name.
+# You may use black or #000000 here.
+page_cmdline_color = gray80
+
+# The color used for showing current directory on page name.
+# You may use black or #000000 here.
+page_dir_color = gray70
+
+# The color used for showing custom name on page name.
+# You may use black or #000000 here.
+page_custom_color = gray60
+
+# The color used for showing normal name on page name.
+# You may use black or #000000 here.
+page_normal_color = gray80
+
+# Shows [Change the foreground color]
+# and [Change the background color] on right click menu.
+show_color_selection_menu = 1
+
+# The normal text color used in vte terminal.
+# You may use black or #000000 here.
+foreground_color = gray80
+
+# The background color used in vte terminal.
+# You may use black or #000000 here.
+background_color = gray20
+
+# Shows [Increase window size], [Decrease window size],
+# [Reset to default font/size] and [Reset to system font/size]
+# on right click menu.
+show_resize_menu = 1
+
+# The default column of vte terminal.
+column = 76
+
+# The default row of vte terminal.
+row = 46
+
+# The default font name of vte terminal.
+font_name = Fixed 16
+
+# Use true opacity. Left it blank will enable it automatically
+# if the window manager were composited.
+use_rgba =
+
+# Shows [Transparent Background], [Background Saturation]
+# [Transparent Window] and [Window Opacity] on right click menu.
+show_transparent_menu = 1
+
+# Transparent Window. Only enabled when the window manager were composited.
+transparent_window = 1
+
+# The opacity of transparent Window.
+window_opacity = 0,050
+
+# Use Transparent Background.
+# It will use true transparent if the window manager were composited.
+transparent_background = 1
+
+# The saturation of transparent background.
+background_saturation = 0,150
+
+# When user double clicks on a text, which character will be selected.
+word_chars = -A-Za-z0-9_$.+!*(),;:@&=?/~#%[]<>
+
+# The lines of scrollback history.
+scrollback_lines = 1024
+
+# Shows input method menu on right cilck menu.
+show_input_method_menu = 0
+
+# Shows get function key menu on right cilck menu.
+show_get_function_key_menu = 1
+
+# The locales list on right click menu.
+# You may use zh_TW or zh_TW.Big5 here.
+# Left it blank will disable locale select menu items.
+locales_list = CP1251 KOI8-U
+
+
+[key]
+
+# Disable/Enable function keys for temporary.
+disable_function_key = Ctrl grave
+
+# Add a new tab.
+new_tab_key = Ctrl+Shift T
+
+# Close current tab.
+close_tab_key = Ctrl+Shift W
+
+# Rename the page name of current tab.
+edit_label_key = Ctrl+Shift E
+
+# Switch to prev tab.
+prev_tab_key = 
+
+# Switch to next tab.
+next_tab_key = 
+
+# Switch to first tab.
+first_tab_key = 
+
+# Switch to last tab.
+last_tab_key = 
+
+# Move current page forward.
+move_tab_forward = 
+
+# Move current page backward.
+move_tab_backward = 
+
+# Move current page to first.
+move_tab_first = 
+
+# Move current page to last.
+move_tab_last = 
+
+# Switch to 1st tab directly.
+swith_to_tab_1 = Ctrl F1
+
+# Switch to 2nd tab directly.
+swith_to_tab_2 = Ctrl F2
+
+# Switch to 3rd tab directly.
+swith_to_tab_3 = Ctrl F3
+
+# Switch to 4st tab directly.
+swith_to_tab_4 = Ctrl F4
+
+# Switch to 5st tab directly.
+swith_to_tab_5 = Ctrl F5
+
+# Switch to 6st tab directly.
+swith_to_tab_6 = Ctrl F6
+
+# Switch to 7st tab directly.
+swith_to_tab_7 = Ctrl F7
+
+# Switch to 8st tab directly.
+swith_to_tab_8 = Ctrl F8
+
+# Switch to 9st tab directly.
+swith_to_tab_9 = Ctrl F9
+
+# Switch to 10st tab directly.
+swith_to_tab_10 = Ctrl F10
+
+# Switch to 11st tab directly.
+swith_to_tab_11 = Ctrl F11
+
+# Switch to 12st tab directly.
+swith_to_tab_12 = Ctrl F12
+
+# Select all the text in the Vte Terminal box.
+select_all = 
+
+# Copy the text to clipboard.
+copy_clipboard = 
+
+# Past the text in clipboard.
+past_clipboard = 
+
+# Increase the font size of current tab.
+increase_font_size = Ctrl equal
+
+# Decrease the font size of current tab.
+decrease_font_size = Ctrl minus
+
+# Reset the font of current tab to original size.
+reset_font_size = Ctrl Return
+
