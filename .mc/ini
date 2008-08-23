@@ -89,8 +89,8 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/wolgri
-current_is_left=1
+other_dir=/
+current_is_left=0
 
 [New Left Panel]
 display=listing

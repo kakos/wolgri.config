@@ -63,7 +63,6 @@ apptags =
 }
 --}}}
 -- }}}
-
 -- {{{ Initialization
 -- Initialize theme (colors).
 beautiful.init(theme_path)
@@ -76,7 +75,6 @@ awful.beautiful.register(beautiful)
 -- Uncomment this to activate autotabbing
 -- tabulous.autotab_start()
 -- }}}
-
 -- {{{ Tags
 -- Define tags table.
 tags = {}
@@ -107,7 +105,6 @@ tags[1][6].screen = 1
 
 tags[1][1].selected = true
 -- }}}
-
 -- {{{ Statusbar
 --{{{ Create a taglist widget
 mytaglist = widget({ type = "taglist", name = "mytaglist" })
@@ -276,8 +273,8 @@ for s = 1, screen.count() do
     mystatusbar[s] = statusbar({ position = "top", name = "mystatusbar" .. s,
                                    fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the statusbar - order matters
-    mystatusbar[s].widgets =
-    {
+    mystatusbar[s]:widgets ({
+        myiconbox,
         battarywidget,
         mytaglist,
         tb_space,
@@ -288,7 +285,6 @@ for s = 1, screen.count() do
         tb_spacer,
         cpu0graphwidget, tb_spacer,
         cpu1graphwidget, tb_spacer,
-
         membarwidget,
         tb_spacer,
         essidwidget,
@@ -297,21 +293,18 @@ for s = 1, screen.count() do
         tb_spacer,
         ratewidget,
         datew,
-
         mylayoutbox[s],
         s == screen.count() and mysystray or nil
-    }
+    })
     mystatusbar[s].screen = s
 end
 -- }}}
 -- }}}
-
 -- {{{ Mouse bindings
 awesome.mouse_add(mouse({ }, 3, function () awful.spawn(terminal) end))
 awesome.mouse_add(mouse({ }, 4, awful.tag.viewnext))
 awesome.mouse_add(mouse({ }, 5, awful.tag.viewprev))
 -- }}}
-
 -- {{{ Key bindings
 
 -- {{{Bind keyboard digits
@@ -401,6 +394,8 @@ keybinding({ modkey }, "Tab", awful.client.focus.history.previous):add()
 -- }}}
 
 --{{{ Layout manipulation
+keybinding({ modkey }, "u", awful.client.urgent.jumpto):add()
+keybinding({ modkey, "Shift" }, "r", function () client.focus:redraw() end):add()
 keybinding({ modkey }, "Down", function () awful.tag.incmwfact(0.05) end):add()
 keybinding({ modkey }, "Up", function () awful.tag.incmwfact(-0.05) end):add()
 keybinding({ modkey, "Shift" }, "Up", function () awful.tag.incnmaster(1) end):add()
@@ -489,7 +484,6 @@ for i = 1, keynumber do
 end
 -- }}}
 -- }}}
-
 -- {{{ Hooks
 --{{{ cpu
 cpu0_total = 0
@@ -773,13 +767,13 @@ function hook_arrange(screen)
     --[[ 
     local sel = client.focus
     if sel then
-        local c_c = sel.coords
-        local m_c = mouse.coords
+        local c_c = sel:coords()
+        local m_c = mouse:coords()
 
         if m_c.x < c_c.x or m_c.x >= c_c.x + c_c.width or
             m_c.y < c_c.y or m_c.y >= c_c.y + c_c.height then
             if table.maxn(m_c.buttons) == 0 then
-                mouse.coords = { x = c_c.x + 5, y = c_c.y + 5}
+                mouse.coords ({ x = c_c.x + 5, y = c_c.y + 5})
             end
         end 
     end]]
@@ -803,5 +797,4 @@ awful.hooks.timer.register(5, get_bat)
 
 -- }}}
 -- }}}
-
 -- vim: set filetype=lua fdm=marker tabstop=4 shiftwidth=4 expandtab smarttab autoindent smartindent nu:
