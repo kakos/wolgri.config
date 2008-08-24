@@ -1,41 +1,72 @@
 source ~/secret/mutt.gmail
+##{{{ Options
+##{{{  Gmail  
+#set imap_user = 'USERNAME@[domain]'
+#set smtp_url="smtps://USERNAME@[domain]:PASSWORD@smtp.gmail.com/"
+#set imap_pass = 'PASSWORD'
+#set from = 'EMAIL@address'
+set realname="Volodymer Grigorenko"
+set folder = "imaps://imap.gmail.com"
+set record="imaps://imap.gmail.com/[Google Mail]/Sent Mail"
+set postponed="imaps://imap.gmail.com/[Google Mail]/Drafts"
+set spoolfile = imaps://imap.gmail.com/INBOX
+set record="imaps://imap.gmail.com/[Google Mail]/Sent Mail"
+set imap_check_subscribed="yes"
+set imap_list_subscribed="yes"
+set imap_keepalive=200
+##}}}
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
 
+set markers=no
+set collapse_unread=no
+set nouse_domain 
+set index_format="%4C %Z %{%m/%d} %-15.15F (%4c) %s"
+set mbox="!"
+
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+set imap_check_subscribed
+
+set move = no
 set pager_context=1    
-set pager_index_lines=6                 #show a mini-index in pager
+set pager_index_lines=6
 set menu_scroll  
-set status_on_top                       #put status line at top 
-set sort=threads                        #sort by message threads in index
+set status_on_top
+set sort=threads
 
 set status_format=" %r %b %f %n      Del %d      Msgs %m %l %> (%P)"
 set pager_format="%-10.10i %[!%a %b %d %R]"
 set date_format="!%H:%M %a %d %b     "   
-#set index_format="%4C %Z %[%b%d] %-15.15F %s" 
+set index_format="%4C %Z %[%b%d] %-15.15F %s" 
 set folder_format="%2C %t %8s %d %N %f" 
 set index_format="%4C %Z %M %{%b %d} %-20.20n %s" 
 set pager_index_lines=6
 
-set delete=yes                          #delete without prompting
-set include=yes             #quote msg in reply 
-set fast_reply=yes          #no prompting on reply
-set beep=no             #no noise
-set markers=no              #no + on wrapped lines
-set confirmappend=no            #no prompt for save to =keep    
-set to_chars=" +TCF"                    #no L for mail_list
+set delete=yes
+set include=yes
+set fast_reply=yes
+set beep=no
+set confirmappend=no
+set to_chars=" +TCF"
 
-set date_format="!%H:%M %a %d %b     "   
+set date_format="!%H:%M %a %d %b"   
 set use_8bitmime
 set assumed_charset="utf8"
 set charset="utf8"
-
-# default list of header fields to weed out when displaying mail
-#ignore them all and then unignore what you want to see 
+#}}}
+# {{{ Headers
 ignore *
 unignore  Date To From: Subject X-Mailer Organization User-Agent List-Post List-Id
 hdr_order Date From To Subject X-Mailer User-Agent Organization List-Post List-Id
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# Color definitions
-#
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+#}}}
+#{{{ Color
 
 color normal white default
 color hdrdefault red default
@@ -76,56 +107,7 @@ color index green default ~N
 color body magenta default "(ftp|http)://[^ ]+"
 color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
 color underline brightgreen default
-
-#color sidebar_new yellow default
-
-# sidebar shortcuts
-macro index \CN ':push <sidebar-next-new><enter>'
-macro pager \CN ':push <sidebar-next-new><enter>'
-macro index \CW ':push <sidebar-next><enter>'
-macro pager \CW ':push <sidebar-next><enter>'
-macro index \CO ':push <sidebar-open><enter>'
-macro pager \CO ':push <sidebar-open><enter>'
-macro index \CP ':push <sidebar-prev-new><enter>'
-macro pager \CP ':push <sidebar-prev-new><enter>'
-macro index \CR ':push <sidebar-prev><enter>'
-macro pager \CR ':push <sidebar-prev><enter>'
-macro index S ':toggle sidebar_visible^M'
-macro pager S ':toggle sidebar_visible^M'
-macro compose S ':toggle sidebar_visible^M'
-macro index Q ':toggle sidebar_newmail_only^M'
-macro pager Q ':toggle sidebar_newmal_only^M'
-macro compose Q ':toggle sidebar_newmail_only^M'
+#}}}
 macro index \cb '|urlview<enter>'
 macro pager \cb '|urlview<enter>'
-
-### 
-#set imap_user = 'USERNAME@[domain]'
-#set smtp_url="smtps://USERNAME@[domain]:PASSWORD@smtp.gmail.com/"
-#set imap_pass = 'PASSWORD'
-#set from = 'EMAIL@address'
-
-set realname="Volodymer Grigorenko"
-set folder = "imaps://imap.gmail.com/"
-set record="imaps://imap.gmail.com/[Google Mail]/Sent Mail"
-set postponed="imaps://imap.gmail.com/[Google Mail]/Drafts"
-set spoolfile = "+INBOX"
-
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
-set certificate_file=~/.mutt/certificates
-
-set sort = 'threads'
-set sort_aux = 'last-date-received'
-set imap_check_subscribed
-
-ignore "Authentication-Results:"
-ignore "DomainKey-Signature:"
-ignore "DKIM-Signature:"
-hdr_order Date From To Cc
-
-set move = no
-
-bind index "y" imap-fetch-mail
-bind index "l" display-message
-bind pager "h" exit
+# vim: set  fdm=marker tabstop=4 shiftwidth=4 expandtab smarttab autoindent smartindent nu: 

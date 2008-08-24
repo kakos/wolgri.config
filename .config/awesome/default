@@ -4,25 +4,18 @@
 
 font          = sans 8
 
-bg_normal     = #222222
-bg_focus      = #535d6c
-bg_urgent     = #ff0000
+bg_normal     = gray20
+bg_focus      = dim gray
+bg_urgent     = red
 
-fg_normal     = #aaaaaa
-fg_focus      = #ffffff
-fg_urgent     = #ffffff
+fg_normal     = gray80
+fg_focus      = gray80
+fg_urgent     = white
 
-border_width  = 1
-border_normal = #000000
-border_focus  = #535d6c
-border_marked = #91231c
-
-# Display the taglist squares
-taglist_squares = true
-
-# You can use your own command to
-# set your wallpaper
-wallpaper_cmd = nitrogen --restore 
+border_width  = 0.9
+border_normal = black
+border_focus  = gray
+border_marked = red
 
 # There are another variables sets
 # overriding the default one when
@@ -32,7 +25,25 @@ wallpaper_cmd = nitrogen --restore
 # Example:
 taglist_bg_focus = #ff0000
 
+# Display the taglist squares
+taglist_squares = true
+
 # You can add as many variables as
 # you wish and access them by using
 # beautiful.variable in your rc.lua
-#bg_widget    = #cc0000
+bg_widget    = #cc0000
+
+# Display close button inside titlebar
+titlebar_close_button = false
+
+# Define the image to load
+@ (if titlebar_close_button_[normal|focus] these values are ignored)
+#titlebar_close_button_img_normal = /titlebar/closea.png
+#titlebar_close_button_img_focus = /titlebar/closera.png
+# Or create your own close button
+#titlebar_close_button_normal = <span>...</span>
+#titlebar_close_button_focus = <span>...</span>
+
+# You can use your own command to set your wallpaper
+#wallpaper_cmd = awsetbg /usr/local/share/awesome/themes/default-background.png
+wallpaper_cmd = nitrogen --restore 

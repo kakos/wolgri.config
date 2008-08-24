@@ -1,8 +1,10 @@
--- Wolgri laptop  awesome 3 configuration file
+-- Wolgri`s laptop  awesome 3 configuration file
 -- based on :
 -- http://modeemi.fi/~tuomov/repos/ion-scripts-3/statusd/statusd_iwinfo.lua
 -- http://www.calmar.ws/dotfiles/dotfiledir/awesome-status.lua
 -- http://git.glacicle.com/?p=wicked.git;a=summary
+
+home_dir = os.getenv("HOME")
 
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
@@ -13,7 +15,7 @@ require("beautiful")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/home/wolgri/.config/awesome/default"
+theme_path = home_dir.."/.config/awesome/default"
 
 -- This is used later as the default terminal to run.
 terminal = "urxvt"
@@ -117,24 +119,28 @@ mytaglist:mouse_add(mouse({ }, 5, awful.tag.viewprev))
 mytaglist.label = awful.widget.taglist.label.all
 --}}}
 --{{{ Spacer
-tb_spacer= widget({ type = 'textbox', name = 'tb_spacer',align = 'right' })
-tb_spacer.width = "4"
-tb_spacer.text = " "
-
+local bg_color = beautiful.bg_normal
 tb_space= widget({ type = 'textbox', name = 'tb_space'})
 tb_space.width = "4"
-tb_space.text = " "
+--tb_space.text = " "
+tb_space.text = "<bg color=\"" .. bg_color .. "\"/> <span color=\"" .. bg_color .. "\">z</span>"
+
+tb_spacer= widget({ type = 'textbox', name = 'tb_spacer',align = 'right' })
+tb_spacer.width = "4"
+--tb_spacer.text = " "
+tb_spacer.text = tb_space.text
+
 --}}}
 --{{{ Batt
 battarywidget = widget({ type = 'progressbar', name = 'battarywidget' })
-battarywidget.width = 25
-battarywidget.height = 0.5
+battarywidget.width = 10
+battarywidget.height = 1
 battarywidget.gap = 1
 battarywidget.border_padding = 1
 battarywidget.border_width = 1
-battarywidget.ticks_count = 6
+battarywidget.ticks_count = 5
 battarywidget.ticks_gap = 1
-battarywidget.vertical = false
+battarywidget.vertical = true
 battarywidget:bar_properties_set('bat', {
 bg = 'blue',
 fg = 'gray',
@@ -274,24 +280,19 @@ for s = 1, screen.count() do
                                    fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the statusbar - order matters
     mystatusbar[s]:widgets ({
-        myiconbox,
-        battarywidget,
-        mytaglist,
-        tb_space,
+        myiconbox,tb_space,
+        battarywidget,tb_space,
+        mytaglist,tb_space,
         mytasklist,
-        mypromptbox,
-        tb_spacer,
-        mhzwidget,
-        tb_spacer,
-        cpu0graphwidget, tb_spacer,
-        cpu1graphwidget, tb_spacer,
-        membarwidget,
-        tb_spacer,
-        essidwidget,
-        tb_spacer,
-        lqbarwidget,
-        tb_spacer,
-        ratewidget,
+        mypromptbox,tb_spacer,
+        mhzwidget,tb_spacer,
+        cpu0graphwidget,tb_spacer,
+        cpu1graphwidget,tb_spacer,
+        membarwidget,tb_spacer,
+        essidwidget,tb_spacer,
+        lqbarwidget,tb_spacer,
+        ratewidget, tb_spacer,
+
         datew,
         mylayoutbox[s],
         s == screen.count() and mysystray or nil
@@ -642,7 +643,7 @@ function hook_timer ()
            sdate = line
     end 
     d:close()
-    datew.text = "<bg color=\"gray20\"/> <span font_desc=\"sans bold 9\" color=\"white\">"..sdate.. "</span>"
+    datew.text = "<bg color=\"gray30\"/> <span font_desc=\"sans bold 8\" color=\"white\">"..sdate.. "</span>"
     -- Otherwise use:
     -- mytextbox.text = " " .. os.date() .. " "
 end
