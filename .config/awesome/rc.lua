@@ -133,18 +133,18 @@ tb_spacer.text = tb_space.text
 --}}}
 --{{{ Batt
 battarywidget = widget({ type = 'progressbar', name = 'battarywidget' })
-battarywidget.width = 10
-battarywidget.height = 1
+battarywidget.width = 100
+battarywidget.height = 0.8
 battarywidget.gap = 1
 battarywidget.border_padding = 1
 battarywidget.border_width = 1
-battarywidget.ticks_count = 5
+battarywidget.ticks_count = 10
 battarywidget.ticks_gap = 1
-battarywidget.vertical = true
+battarywidget.vertical = false
 battarywidget:bar_properties_set('bat', {
-bg = 'blue',
-fg = 'gray',
-fg_off = 'blue',
+bg = 'black',
+fg = 'blue4',
+fg_off = 'red',
 reverse = false,
 min_value = 0,
 max_value = 100
