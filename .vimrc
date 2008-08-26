@@ -28,6 +28,8 @@ map <S-Insert> <MiddleMouse>
 nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
 nno <F4> :set nu!<bar>set nu?<CR>
 map <F1> :MarksBrowser<cr>
+map <F3> :w!<CR>:!aspell check %<CR>:e! %<CR>
+:autocmd FileType mail :nmap <F8> :w<CR>:!aspell -d en,uk,ru -e -c %<CR>:e<CR>
 vmap <F1> <esc>:MarksBrowser<cr>
 imap <F1> <esc>:MarksBrowser<cr>
 map <F11> :TlistToggle<cr>

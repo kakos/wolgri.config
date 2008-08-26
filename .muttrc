@@ -18,7 +18,7 @@ set imap_keepalive=200
 set header_cache=~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
-
+set ispell="aspell -e -c"
 set markers=no
 set collapse_unread=no
 set nouse_domain 

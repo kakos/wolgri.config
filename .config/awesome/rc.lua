@@ -80,7 +80,20 @@ awful.beautiful.register(beautiful)
 -- {{{ Tags
 -- Define tags table.
 tags = {}
-tags[1]= {}
+for s = 2, screen.count() do
+    -- Each screen has its own tag table.
+    tags[s] = {}
+    -- Create 9 tags per screen.
+    for tagnumber = 1, 2 do
+        tags[s][tagnumber] = tag({ name = tagnumber, layout = layouts[1] })
+        -- Add tags to screen one by one
+        tags[s][tagnumber].screen = s
+    end
+    -- I'm sure you want to see at least one tag.
+    tags[s][1].selected = true
+end
+
+tags[1] = {}
 tags[1][1] = tag({ name = "main", layout = layouts[1] })
 tags[1][1].mwfact = 0.5
 tags[1][1].screen = 1
@@ -104,8 +117,9 @@ tags[1][5].screen = 1
 tags[1][6] = tag({ name = "etc", layout = layouts[4] })
 tags[1][6].mwfact = 0.6
 tags[1][6].screen = 1
-
 tags[1][1].selected = true
+
+
 -- }}}
 -- {{{ Statusbar
 --{{{ Create a taglist widget
@@ -275,11 +289,10 @@ end
 --}}}
 -- {{{ Create a statusbar for each screen and add it
 mystatusbar = {}
-for s = 1, screen.count() do
-    mystatusbar[s] = statusbar({ position = "top", name = "mystatusbar" .. s,
+    mystatusbar[1] = statusbar({ position = "top", name = "mystatusbar" .. 1,
                                    fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the statusbar - order matters
-    mystatusbar[s]:widgets ({
+    mystatusbar[1]:widgets ({
         myiconbox,tb_space,
         battarywidget,tb_space,
         mytaglist,tb_space,
@@ -292,13 +305,22 @@ for s = 1, screen.count() do
         essidwidget,tb_spacer,
         lqbarwidget,tb_spacer,
         ratewidget, tb_spacer,
-
         datew,
-        mylayoutbox[s],
-        s == screen.count() and mysystray or nil
+        mylayoutbox[1],
+        mysystray })
+    mystatusbar[1].screen = 1
+for s = 2, screen.count() do
+    mystatusbar[s] = statusbar({ position = "top", name = "mystatusbar" .. s,
+                                   fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    -- Add widgets to the statusbar - order matters
+    mystatusbar[s]:widgets ({
+        mytaglist,
+        mytasklist,
+        mylayoutbox[s]
     })
     mystatusbar[s].screen = s
 end
+
 -- }}}
 -- }}}
 -- {{{ Mouse bindings
