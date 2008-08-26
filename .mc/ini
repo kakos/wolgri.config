@@ -77,7 +77,7 @@ editor_backup_extension=~
 
 [Layout]
 equal_split=1
-first_panel_size=27
+first_panel_size=24
 message_visible=0
 keybar_visible=0
 xterm_title=0
@@ -89,8 +89,8 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/PRIVAT
-current_is_left=0
+other_dir=/mnt/mybook/pub/muzik
+current_is_left=1
 
 [New Left Panel]
 display=listing

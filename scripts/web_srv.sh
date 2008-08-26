@@ -1,18 +1,27 @@
+do_start (){
+ sudo invoke-rc.d mysql start
+ sudo invoke-rc.d lighttpd start
+}
+do_stop (){
+ sudo invoke-rc.d mysql stop
+ sudo invoke-rc.d lighttpd stop
+}
+
 case $1 in
  start)
-     sudo invoke-rc.d mysql start
- #    sudo invoke-rc.d php-cgi start
-     sudo invoke-rc.d lighttpd start
+ do_start
   ;;
  stop)
-     sudo invoke-rc.d mysql stop
-#     sudo invoke-rc.d php-cgi stop
-     sudo invoke-rc.d lighttpd stop
+ do_stop
+  ;;
+ restart)
+ do_stop
+ do_start
 ;;
+
  *)
-  echo "usage: $0 (start|stop)"
-  echo "lighttpd:`ps aux |grep lighttpd|grep -v grep | wc -l`"
-  echo "mysqld:`ps aux |grep mysqld|grep -v grep| wc -l`"
+  echo "usage: $0 (start|stop|restart)"
   exit 1
 esac
+
 
