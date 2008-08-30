@@ -1,0 +1,46 @@
+#shell /bin/zsh
+nethack               on
+autodetach            on              # Standard: on
+crlf                  on             # Standard: off
+deflogin              off             # Standard: on
+hardcopy_append       on              # Standard: off
+startup_message       off             # Standard: on
+vbell                 off
+defscrollback         1000            # Standard: 100
+silencewait           15              # Standard: 30
+activity              "activity in %n (%t) [%w:%s]~"
+bell                  "%C -> %n%f %t activity!"
+nonblock on
+encoding utf8
+defsilence off
+defutf8 on
+shelltitle '%n|%t|%h|'
+hardstatus alwayslastline  "%{= Rw}[%H]%{bw} %{Kw} %c %{bw} %-w%{+b wK} [(%n)%t] %{-}%+w %=%f  %{Rw} %l %{bw}"
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+bind 'K' kill
+bind 'I' login on
+bind 'O' login off
+bind '}' history
+activity 'Activity on screen %n ^G'
+
+bind s
+bind x lockscreen
+bind ^s 
+bind k 
+bind ^k 
+bind ^\
+bind \\
+bind m screen -t 'mutt'    1 mutt
+bind M screen -t 'mpc'    1 ncmpc
+bind R screen -t 'rss'       1 snownews
+bind j screen -t 'jabber'       1 mcabber
+bind -c enc "^u" encoding utf8
+bind -c enc "^k" encoding koi8-u
+bind -c enc "^w" encoding cp1251
+bindkey "^e" command -c enc 

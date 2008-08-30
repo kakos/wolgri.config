@@ -89,7 +89,7 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/mnt/mybook/pub/muzik
+other_dir=/home/wolgri/stuff
 current_is_left=1
 
 [New Left Panel]
