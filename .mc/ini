@@ -89,8 +89,8 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/wolgri/stuff
-current_is_left=1
+other_dir=/home/PRIVAT/winsoft
+current_is_left=0
 
 [New Left Panel]
 display=listing

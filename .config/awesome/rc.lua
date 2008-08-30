@@ -61,6 +61,8 @@ apptags =
      ["Swiftfox"] = { screen = 1, tag = 2 },
      ["lilyterm"] = { screen = 1, tag = 1 },
      ["vmware"] = { screen = 1, tag = 5 },
+     ["gajim.py"] = { screen = 1, tag = 3 },
+
 
 }
 --}}}
@@ -102,7 +104,7 @@ tags[1][2] = tag({ name = "www", layout = layouts[1] })
 tags[1][2].mwfact = 0.5
 tags[1][2].screen = 1
 
-tags[1][3] = tag({ name = "stuff", layout = layouts[1] })
+tags[1][3] = tag({ name = "stuff", layout = "floating"})
 tags[1][3].mwfact = 0.6
 tags[1][3].screen = 1
 
@@ -437,13 +439,25 @@ os.getenv("HOME") .. "/.cache/awesome_history") end):add()
 keybinding({ modkey }, "F4", function ()
                                  awful.prompt.run({ prompt = "Run Lua code: " }, mypromptbox, awful.eval, awful.prompt.bash,
 os.getenv("HOME") .. "/.cache/awesome_history_eval") end):add()
+
+
 keybinding({ modkey, "Ctrl" }, "i", function ()
                                         if mypromptbox.text then
                                             mypromptbox.text = nil
                                         else
-                                            mypromptbox.text = "Class: " .. client.focus.class .. " Instance: ".. client.focus.instance
+                                            mypromptbox.text = nil
+                                            if client.focus.class then
+                                                mypromptbox.text = "Class: " .. client.focus.class .. " "
+                                            end
+                                            if client.focus.instance then
+                                                mypromptbox.text = mypromptbox.text .. "Instance: ".. client.focus.instance .. " "
+                                            end
+                                            if client.focus.role then
+                                                mypromptbox.text = mypromptbox.text .. "Role: ".. client.focus.role
+                                            end
                                         end
                                     end):add()
+
 -- }}}
 
 --{{{ Tabulous, tab manipulation
@@ -660,14 +674,9 @@ end
 --}}}
 --{{{ date hook I want  date in Ukrainian   
 function hook_timer ()
-    local d= io.popen("date +\"%a %d %b - %H:%M\"")
-    for line in d:lines() do
-           sdate = line
-    end 
-    d:close()
-    datew.text = "<bg color=\"gray30\"/> <span font_desc=\"sans bold 8\" color=\"white\">"..sdate.. "</span>"
-    -- Otherwise use:
-    -- mytextbox.text = " " .. os.date() .. " "
+    os.setlocale(os.getenv("LC_ALL"))
+    datew.text = " " .. os.date() .. " " 
+    datew.text = "<bg color=\"gray30\"/> <span font_desc=\"sans bold 8\" color=\"white\">"..os.date('%a %d %b  %H:%M' ).. "</span>"
 end
 -- }}}
 -- {{{ splitbywhitespace stolen from wicked.lua
