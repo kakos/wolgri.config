@@ -28,13 +28,13 @@ style "my-default"
     fg[ACTIVE] = "gray80" # Light Gray
     fg[SELECTED] = "white" # White
     fg[NORMAL] = "gray80" # Light Gray
-    fg[PRELIGHT] = "white" # White
+    fg[PRELIGHT] = "black" # White
     fg[INSENSITIVE] = "gray60" # 3D Shadow
 
     bg[ACTIVE] = "gray30" # Dark Gray
     bg[SELECTED] = "gray80" # Dark Gray
     bg[NORMAL] = "gray20" # Basic 3D Hilight
-    bg[PRELIGHT] = "gray35" # Gray Hilight
+    bg[PRELIGHT] = "gray65" # Gray Hilight
     bg[INSENSITIVE] = "gray40" # Basic 3D Hilight
 
     base[ACTIVE] = "gray10" # Basic 3D Dark
@@ -47,11 +47,27 @@ style "my-default"
     text[SELECTED] = "black" # Light Gray
     text[NORMAL] = "gray80" # Black
     text[PRELIGHT] = "white" # White
-    text[INSENSITIVE] = "gray50" # 3D Shadow
+    text[INSENSITIVE] = "gray10" # 3D Shadow
 
-  engine "hcengine"
+#  engine "hcengine"
+#    {
+#        edge_thickness=1
+#    } 
+
+  engine "clearlooks"
   {
-      edge_thickness=1
+    colorize_scrollbar = TRUE
+    reliefstyle        = 1 
+    menubarstyle       = 0      # 0 = flat, 1 = sunken, 2 = flat gradient
+    toolbarstyle       = 0      # 0 = flat, 1 = enable effects
+    animation          = FALSE
+    style              = CLASSIC
+    radius = 0.5
+
+
+    # Set a hint to disable backward compatibility fallbacks.
+    hint = "use-hints"
+
   }
 }
 

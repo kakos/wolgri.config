@@ -12,10 +12,10 @@ fg_normal     = gray80
 fg_focus      = gray80
 fg_urgent     = white
 
-border_width  = 0.9
-border_normal = black
-border_focus  = gray
-border_marked = red
+border_width  = 1
+border_normal = #000000
+border_focus  = #535d6c
+border_marked = #91231c
 
 # There are another variables sets
 # overriding the default one when

@@ -112,11 +112,11 @@ tags[1][4] = tag({ name = "work", layout = layouts[1] })
 tags[1][4].mwfact = 0.6
 tags[1][4].screen = 1
 
-tags[1][5] = tag({ name = "virt", layout = layouts[3] })
+tags[1][5] = tag({ name = "virt", layout = "max" })
 tags[1][5].mwfact = 0.6
 tags[1][5].screen = 1
 
-tags[1][6] = tag({ name = "etc", layout = layouts[4] })
+tags[1][6] = tag({ name = "etc", layout = "floating" })
 tags[1][6].mwfact = 0.6
 tags[1][6].screen = 1
 tags[1][1].selected = true
@@ -777,6 +777,8 @@ function hook_manage(c)
     -- Honor size hints
     c.honorsizehints = true
 end
+
+
 -- }}}
 --{{{ Hook function to execute when arranging the screen
 -- (tag switch, new client, etc)
@@ -819,10 +821,10 @@ awful.hooks.unmarked.register(hook_unmarked)
 awful.hooks.manage.register(hook_manage)
 awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
+
 awful.hooks.timer.register(1, hook_timer)
 awful.hooks.timer.register(1, get_mem)
 awful.hooks.timer.register(1, get_cpu)
-
 awful.hooks.timer.register(1, get_mhz)
 awful.hooks.timer.register(5, update_iwinfo)
 awful.hooks.timer.register(5, get_bat)
