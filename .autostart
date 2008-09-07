@@ -1,5 +1,6 @@
 #!/bin/sh
-
+# XKB
+setxkbmap -option grp:switch,grp:caps_toggle,grp_led:scroll 'us,ua,ru'
 #Synaptic
 syndaemon -d 
 synclient HorizTwoFingerScroll=0
@@ -8,11 +9,14 @@ synclient HorizEdgeScroll=0
 synclient VertEdgeScroll=0
 synclient CircularScrolling=0
 nitrogen --restore
-sleep 4 ;
+sleep 4 
 lilyterm -t 2 &
 setroot -solid '#222222' -cursor_name left_ptr &
 nitrogen --restore
 unclutter -root -idle 5 &
 x11vnc -usepw -shared -forever > /dev/null &
 fuse.sh restart
+www&
+xxkb&
+gajim&
 xscreensaver > /dev/null

@@ -167,10 +167,12 @@ max_value = 100
 })
 
 --}}}
+--{{{ skb
+skbwidget = widget({ type = 'textbox', name = 'skbwidget' , align = 'right' })
+--}}}
+
 --{{{ Mhz
 mhzwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
-
-
 --}}}
 --{{{ Cpu
 
@@ -272,7 +274,7 @@ mypromptbox = widget({ type = "textbox", name = "mypromptbox", align = "left" })
 --}}}
 --{{{ Create an iconbox widget
 myiconbox = widget({ type = "textbox", name = "myiconbox", align = "left" })
-myiconbox.text = "<bg image=\"/usr/local/share/awesome/icons/awesome16.png\" resize=\"true\"/>"
+myiconbox.text = "<bg image=\"/usr/share/awesome/icons/awesome16.png\" resize=\"true\"/>"
 
 -- Create a systray
 mysystray = widget({ type = "systray", name = "mysystray", align = "right" })
@@ -286,7 +288,7 @@ for s = 1, screen.count() do
     mylayoutbox[s]:mouse_add(mouse({ }, 3, function () awful.layout.inc(layouts, -1) end))
     mylayoutbox[s]:mouse_add(mouse({ }, 4, function () awful.layout.inc(layouts, 1) end))
     mylayoutbox[s]:mouse_add(mouse({ }, 5, function () awful.layout.inc(layouts, -1) end))
-    mylayoutbox[s].text = "<bg image=\"/usr/local/share/awesome/icons/layouts/tilew.png\" resize=\"true\"/>"
+    mylayoutbox[s].text = "<bg image=\"/usr/share/awesome/icons/layouts/tilew.png\" resize=\"true\"/>"
 end
 --}}}
 -- {{{ Create a statusbar for each screen and add it
@@ -307,7 +309,7 @@ mystatusbar = {}
         essidwidget,tb_spacer,
         lqbarwidget,tb_spacer,
         ratewidget, tb_spacer,
-        datew,
+        datew,tb_spacer,skbwidget,
         mylayoutbox[1],
         mysystray })
     mystatusbar[1].screen = 1
@@ -613,6 +615,17 @@ function get_mhz()
 mhzwidget.text =""..mhz..""
 end 
 --}}} 
+--{{{ skb hook
+function get_skb()
+    local m = io.popen("skb -1")
+      for line in m:lines() do
+            skb = line
+      end    
+
+    m:close()
+skbwidget.text ="<bg color=\"blue\"/><span font_desc=\"sans bold 9\" color=\"white\"> " ..skb.. " </span>"
+end 
+--}}} 
 --{{{ wifi hook
 
 local function get_iwinfo_iwcfg()
@@ -647,7 +660,7 @@ local function update_iwinfo()
 	noise = noise or "N/A"
 	proto = proto or "N/A"
 
-essidwidget.text ="<bg color=\"red\"/><span font_desc=\"sans bold 9\" color=\"white\">"..ssid.."</span>"
+essidwidget.text ="<bg color=\"red\"/><span font_desc=\"sans bold 9\" color=\"white\"> "..ssid.." </span>"
 ratewidget.text = "<span color=\"green\">"..bitrate.."</span>"
 lqbarwidget:bar_data_add("lq",linkq )
 
@@ -786,7 +799,7 @@ function hook_arrange(screen)
     local layout = awful.layout.get(screen)
     if layout then
         mylayoutbox[screen].text =
-            "<bg image=\"/usr/local/share/awesome/icons/layouts/" .. awful.layout.get(screen) .. "w.png\" resize=\"true\"/>"
+            "<bg image=\"/usr/share/awesome/icons/layouts/" .. awful.layout.get(screen) .. "w.png\" resize=\"true\"/>"
         else
             mylayoutbox[screen].text = "No layout."
     end
@@ -826,6 +839,7 @@ awful.hooks.timer.register(1, hook_timer)
 awful.hooks.timer.register(1, get_mem)
 awful.hooks.timer.register(1, get_cpu)
 awful.hooks.timer.register(1, get_mhz)
+awful.hooks.timer.register(1, get_skb)
 awful.hooks.timer.register(5, update_iwinfo)
 awful.hooks.timer.register(5, get_bat)
 
