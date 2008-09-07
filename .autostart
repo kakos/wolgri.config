@@ -17,6 +17,5 @@ unclutter -root -idle 5 &
 x11vnc -usepw -shared -forever > /dev/null &
 fuse.sh restart
 www&
-xxkb&
 gajim&
 xscreensaver > /dev/null
