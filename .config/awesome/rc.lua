@@ -6,6 +6,7 @@
 
 home_dir = os.getenv("HOME")
 
+-- {{{ Variable definitions
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
 -- Include awesome library, with lots of useful function!
@@ -13,7 +14,6 @@ require("awful")
 require("tabulous")
 require("beautiful")
 
--- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
 theme_path = home_dir.."/.config/awesome/default"
 
