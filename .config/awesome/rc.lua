@@ -170,6 +170,9 @@ max_value = 100
 --{{{ skb
 skbwidget = widget({ type = 'textbox', name = 'skbwidget' , align = 'right' })
 --}}}
+--{{{ temp
+tempwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
+--}}}
 
 --{{{ Mhz
 mhzwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
@@ -184,11 +187,11 @@ cpu0graphwidget.border_color = 'gray80'
 cpu0graphwidget.grow = 'left'
 
 cpu0graphwidget:plot_properties_set('cpu', { 
-fg = 'red2',
+fg = 'red',
 style ='line',
-fg_center = 'green', 
-fg_end = 'cyan', 
-vertical_gradient = true 
+--fg_center = 'green', 
+--fg_end = 'cyan', 
+vertical_gradient = false 
 })
 cpu1graphwidget = widget({ type = 'graph', name = 'cpu1graphwidget', align = 'right' }) 
 cpu1graphwidget.height = 0.95
@@ -198,11 +201,11 @@ cpu1graphwidget.border_color = 'gray80'
 cpu1graphwidget.grow = 'left'
 
 cpu1graphwidget:plot_properties_set('cpu', { 
-fg = 'red2',
+fg = 'red',
 style ='line',
-fg_center = 'green', 
-fg_end = 'cyan', 
-vertical_gradient = true 
+--fg_center = 'green', 
+--fg_end = 'cyan', 
+vertical_gradient = false 
 })
 --}}}
 --{{{MeM 
@@ -302,6 +305,7 @@ mystatusbar = {}
         mytaglist,tb_space,
         mytasklist,
         mypromptbox,tb_spacer,
+        tempwidget,tb_spacer,
         mhzwidget,tb_spacer,
         cpu0graphwidget,tb_spacer,
         cpu1graphwidget,tb_spacer,
@@ -615,6 +619,17 @@ function get_mhz()
 mhzwidget.text =""..mhz..""
 end 
 --}}} 
+--{{{ temp hook
+function get_temp()
+    local m = io.popen("echo \"scale=0 ;`cat /sys/bus/pci/drivers/k8temp/*/temp1_input`/1000 \"| bc -l")
+      for line in m:lines() do
+            temp = line
+      end    
+
+    m:close()
+tempwidget.text =""..temp.."°"
+end 
+--}}} 
 --{{{ skb hook
 function get_skb()
     local m = io.popen("skb -1")
@@ -835,13 +850,23 @@ awful.hooks.manage.register(hook_manage)
 awful.hooks.mouseover.register(hook_mouseover)
 awful.hooks.arrange.register(hook_arrange)
 
-awful.hooks.timer.register(1, hook_timer)
-awful.hooks.timer.register(1, get_mem)
-awful.hooks.timer.register(1, get_cpu)
-awful.hooks.timer.register(1, get_mhz)
-awful.hooks.timer.register(1, get_skb)
-awful.hooks.timer.register(5, update_iwinfo)
-awful.hooks.timer.register(5, get_bat)
+function onesec()
+    hook_timer()
+    get_mem()
+    get_cpu()
+    get_mhz()
+    get_skb()
+end
+
+function fivesec()
+    update_iwinfo()
+    get_bat()
+    get_temp()
+
+end
+
+awful.hooks.timer.register(1, onesec)
+awful.hooks.timer.register(5, fivesec)
 
 -- }}}
 -- }}}
