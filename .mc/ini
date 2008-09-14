@@ -89,7 +89,7 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/PRIVAT/build/mybook
+other_dir=/mnt
 current_is_left=0
 
 [New Left Panel]

@@ -33,6 +33,7 @@ layouts =
     "tile",
     "tiletop",
     "max",
+    "fairv",
     "floating"
 }
 --}}}
@@ -277,7 +278,7 @@ mypromptbox = widget({ type = "textbox", name = "mypromptbox", align = "left" })
 --}}}
 --{{{ Create an iconbox widget
 myiconbox = widget({ type = "textbox", name = "myiconbox", align = "left" })
-myiconbox.text = "<bg image=\"/usr/share/awesome/icons/awesome16.png\" resize=\"true\"/>"
+myiconbox.text = "<bg image=\"/usr/local/share/awesome/icons/awesome16.png\" resize=\"true\"/>"
 
 -- Create a systray
 mysystray = widget({ type = "systray", name = "mysystray", align = "right" })
@@ -291,7 +292,7 @@ for s = 1, screen.count() do
     mylayoutbox[s]:mouse_add(mouse({ }, 3, function () awful.layout.inc(layouts, -1) end))
     mylayoutbox[s]:mouse_add(mouse({ }, 4, function () awful.layout.inc(layouts, 1) end))
     mylayoutbox[s]:mouse_add(mouse({ }, 5, function () awful.layout.inc(layouts, -1) end))
-    mylayoutbox[s].text = "<bg image=\"/usr/share/awesome/icons/layouts/tilew.png\" resize=\"true\"/>"
+    mylayoutbox[s].text = "<bg image=\"/usr/local/share/awesome/icons/layouts/tilew.png\" resize=\"true\"/>"
 end
 --}}}
 -- {{{ Create a statusbar for each screen and add it
@@ -814,7 +815,7 @@ function hook_arrange(screen)
     local layout = awful.layout.get(screen)
     if layout then
         mylayoutbox[screen].text =
-            "<bg image=\"/usr/share/awesome/icons/layouts/" .. awful.layout.get(screen) .. "w.png\" resize=\"true\"/>"
+            "<bg image=\"/usr/local/share/awesome/icons/layouts/" .. awful.layout.get(screen) .. "w.png\" resize=\"true\"/>"
         else
             mylayoutbox[screen].text = "No layout."
     end
