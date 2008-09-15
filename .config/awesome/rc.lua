@@ -4,9 +4,9 @@
 -- http://www.calmar.ws/dotfiles/dotfiledir/awesome-status.lua
 -- http://git.glacicle.com/?p=wicked.git;a=summary
 
+-- {{{ Variable definitions
 home_dir = os.getenv("HOME")
 
--- {{{ Variable definitions
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
 -- Include awesome library, with lots of useful function!
@@ -139,12 +139,10 @@ mytaglist.label = awful.widget.taglist.label.all
 local bg_color = beautiful.bg_normal
 tb_space= widget({ type = 'textbox', name = 'tb_space'})
 tb_space.width = "4"
---tb_space.text = " "
-tb_space.text = "<bg color=\"" .. bg_color .. "\"/> <span color=\"" .. bg_color .. "\">z</span>"
+tb_space.text = "<bg color=\"" ..bg_color.. "\"/> <span color=\"" ..bg_color.. "\">z</span>"
 
 tb_spacer= widget({ type = 'textbox', name = 'tb_spacer',align = 'right' })
 tb_spacer.width = "4"
---tb_spacer.text = " "
 tb_spacer.text = tb_space.text
 
 --}}}
@@ -395,7 +393,7 @@ keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
 
 --{{{ Fn keys 
 
-keybinding( {none}, "XF86AudioMute", function () awful.spawn("amix -c 0 set Master toggle") end):add()
+keybinding( {none}, "XF86AudioMute", function () awful.spawn("amixer -c 0 set Master toggle") end):add()
 keybinding( {none}, "XF86AudioRaiseVolume", function () awful.spawn("amixset +") end):add()
 keybinding( {none}, "XF86AudioLowerVolume", function () awful.spawn("amixset -") end):add()
 keybinding( {none}, "XF86AudioPlay", function () awful.spawn("mpc toggle") end):add()

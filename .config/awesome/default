@@ -34,7 +34,7 @@ taglist_squares = true
 bg_widget    = #cc0000
 
 # Display close button inside titlebar
-titlebar_close_button = false
+titlebar_close_button = true
 
 # Define the image to load
 @ (if titlebar_close_button_[normal|focus] these values are ignored)
