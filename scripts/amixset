@@ -3,12 +3,14 @@
 status=`amixer sget Master |grep 'Left: Playback'|sed -e 's/[\[,%]/ /g'|awk '{print $5}'`
 case $1 in
  +)
+    killall -9 osd_cat 
     amixer -c 0 set Master 2dB+
     osd_cat -b percentage -P $status -p middle -d 1 -c green
   ;;
  -)
-   amixer -c 0 set Master 2dB-
-   osd_cat -b percentage -p middle -P $status -d 1 -c red 
+    killall -9 osd_cat 
+    amixer -c 0 set Master 2dB-
+    osd_cat -b percentage -p middle -P $status -d 1 -c red 
 
 ;;
  *)
