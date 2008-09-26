@@ -77,7 +77,7 @@ editor_backup_extension=~
 
 [Layout]
 equal_split=1
-first_panel_size=24
+first_panel_size=25
 message_visible=0
 keybar_visible=0
 xterm_title=0
@@ -89,7 +89,7 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/mnt
+other_dir=/
 current_is_left=0
 
 [New Left Panel]

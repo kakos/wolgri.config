@@ -140,7 +140,7 @@ xosview*swap: True
 xosview*lmstemp: False
 xosview*cpu: True
 xosview*mem: True
-!Xft.dpi: 96
+Xft.dpi: 96
 !Xft.hinting: 1
 !Xft.antialias: True
 !Xft.hintstyle: hintfull
