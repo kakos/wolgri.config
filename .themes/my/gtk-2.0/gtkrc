@@ -49,26 +49,26 @@ style "my-default"
     text[PRELIGHT] = "white" # White
     text[INSENSITIVE] = "gray10" # 3D Shadow
 
-#  engine "hcengine"
-#    {
-#        edge_thickness=1
-#    } 
+  engine "hcengine"
+    {
+        edge_thickness=1
+    } 
 
-  engine "clearlooks"
-  {
-    colorize_scrollbar = TRUE
-    reliefstyle        = 1 
-    menubarstyle       = 0      # 0 = flat, 1 = sunken, 2 = flat gradient
-    toolbarstyle       = 0      # 0 = flat, 1 = enable effects
-    animation          = FALSE
-    style              = CLASSIC
-    radius = 0.5
-
-
-    # Set a hint to disable backward compatibility fallbacks.
-    hint = "use-hints"
-
-  }
+#  engine "clearlooks"
+#  {
+#    colorize_scrollbar = TRUE
+#    reliefstyle        = 1 
+#    menubarstyle       = 0      # 0 = flat, 1 = sunken, 2 = flat gradient
+#    toolbarstyle       = 0      # 0 = flat, 1 = enable effects
+#    animation          = FALSE
+#    style              = CLASSIC
+#    radius = 0.5
+#
+#
+#    # Set a hint to disable backward compatibility fallbacks.
+#    hint = "use-hints"
+#
+#  }
 }
 
 style "my-frame"

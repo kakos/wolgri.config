@@ -32,7 +32,7 @@ use_color_page = 1
 
 # The color used for showing cmdline on page name.
 # You may use black or #000000 here.
-page_cmdline_color = gray80
+page_cmdline_color = gray60
 
 # The color used for showing current directory on page name.
 # You may use black or #000000 here.
@@ -40,11 +40,11 @@ page_dir_color = gray70
 
 # The color used for showing custom name on page name.
 # You may use black or #000000 here.
-page_custom_color = gray60
+page_custom_color = gray70
 
 # The color used for showing normal name on page name.
 # You may use black or #000000 here.
-page_normal_color = gray80
+page_normal_color = gray70
 
 # Shows [Change the foreground color]
 # and [Change the background color] on right click menu.

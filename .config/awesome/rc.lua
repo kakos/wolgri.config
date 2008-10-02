@@ -309,9 +309,7 @@ mystatusbar = {}
         cpu0graphwidget,tb_spacer,
         cpu1graphwidget,tb_spacer,
         membarwidget,tb_spacer,
-        essidwidget,tb_spacer,
-        lqbarwidget,tb_spacer,
-        ratewidget, tb_spacer,
+        essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
         datew,tb_spacer,skbwidget,
         mylayoutbox[1],
         mysystray })

@@ -1,0 +1,51 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+### Keyboard
+# $ above right arrow key
+setkeycodes e034 128
+# € above left arrow key
+setkeycodes e033 129
+# Fn + F1 - Hotkey Help
+setkeycodes e025 130
+# Fn + F2 - Acer eSettings
+setkeycodes e026 131
+# Fn + F3 - Acer ePower Management
+setkeycodes e027 132
+# Fn + F5 - Display Toggle
+setkeycodes e029 134
+# Fn + F7 - Touchpad disable
+setkeycodes e072 135
+# Fn + F7 - Touchpad enable
+setkeycodes e071 136
+
+# Wireless
+setkeycodes e056 137
+setkeycodes e055 138
+
+# Bluetooth - enable and then disable
+setkeycodes e054 139
+setkeycodes e059 140
+
+# Acer Arcade Utility Launcher
+setkeycodes e012 141
+
+# Acer Empowering Technology Launcher (User configurable ;)
+setkeycodes e074 143
+
+#### WIFI
+modprobe ath_pci autocreate=none # mode probe
+wlanconfig wlan create wlandev wifi0 wlanmode sta nosbeacon -bssid # wlan0 managed 
+wlanconfig wlan create wlandev wifi0 wlanmode ap   # wlan1 ap 
+
+exit 0

@@ -1,0 +1,1 @@
+KERNEL=="wifi0", RUN+="/sbin/ath_leds.sh"
