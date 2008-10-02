@@ -1,6 +1,6 @@
 
 [Colors]
-base_color=lightgray,green:normal=green,default:selected=white,gray:marked=yellow,default:markselect=yellow,gray:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:special=lightgray,default:errors=white,red:reverse=green,default:gauge=red,white:input=white,gray:dnormal=green,gray:dfocus=brightgreen,gray:dhotnormal=cyan,gray:dhotfocus=brightcyan,gray:menu=green,default:menuhot=cyan,default:menusel=green,gray:menuhotsel=cyan,default:helpnormal=cyan,default:editnormal=green,default:editbold=blue,default:editmarked=gray,blue:stalelink=red,default
+base_color=lightgray,green:normal=default,default:selected=white,default:marked=yellow,default:markselect=yellow,gray:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:special=lightgray,default:errors=white,red:reverse=green,default:gauge=red,white:input=default,default:dnormal=green,default:dfocus=brightgreen,gray:dhotnormal=cyan,default:dhotfocus=brightcyan,default:menu=white,default:menuhot=cyan,default:menusel=white,red:menuhotsel=cyan,default:helpnormal=cyan,default:editnormal=green,default:editbold=blue,default:editmarked=gray,blue:stalelink=red,default
 
 [Midnight-Commander]
 show_backups=1
@@ -77,7 +77,7 @@ editor_backup_extension=~
 
 [Layout]
 equal_split=1
-first_panel_size=24
+first_panel_size=27
 message_visible=0
 keybar_visible=0
 xterm_title=0
@@ -89,21 +89,21 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/etc
-current_is_left=1
+other_dir=/mnt/mybook/pub/_prn
+current_is_left=0
 
 [New Left Panel]
 display=listing
 reverse=0
 case_sensitive=1
 sort_order=name
-list_mode=full
+list_mode=user
 user_format=half type name | size | perm
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
 user_status2=half type name | size | perm
 user_status3=half type name | size | perm
-user_mini_status=0
+user_mini_status=1
 panel_display_codepage=Other_8_bit
 
 [New Right Panel]
@@ -111,13 +111,13 @@ display=listing
 reverse=0
 case_sensitive=1
 sort_order=name
-list_mode=full
-user_format=half type name | size | perm
+list_mode=user
+user_format=half type perm | size | name
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
 user_status2=half type name | size | perm
 user_status3=half type name | size | perm
-user_mini_status=0
+user_mini_status=1
 panel_display_codepage=Other_8_bit
 
 [Misc]
