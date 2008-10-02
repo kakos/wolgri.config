@@ -139,10 +139,10 @@ mytaglist.label = awful.widget.taglist.label.all
 local bg_color = beautiful.bg_normal
 tb_space= widget({ type = 'textbox', name = 'tb_space'})
 tb_space.width = "4"
-tb_space.text = "<bg color=\"" ..bg_color.. "\"/> <span color=\"" ..bg_color.. "\">z</span>"
+tb_space.text = " "
 
 tb_spacer= widget({ type = 'textbox', name = 'tb_spacer',align = 'right' })
-tb_spacer.width = "4"
+tb_spacer.width = "6"
 tb_spacer.text = tb_space.text
 
 --}}}
@@ -700,8 +700,7 @@ end
 --{{{ date hook I want  date in Ukrainian   
 function hook_timer ()
     os.setlocale(os.getenv("LC_ALL"))
-    datew.text = " " .. os.date() .. " " 
-    datew.text = "<bg color=\"gray30\"/> <span font_desc=\"sans bold 8\" color=\"white\">"..os.date('%a %d %b  %H:%M' ).. "</span>"
+    datew.text ="<bg color=\"gray30\"/><span font_desc=\"sans bold 8\" color=\"white\">"..os.date('%a %d %b  %H:%M').."</span>"
 end
 -- }}}
 -- {{{ splitbywhitespace stolen from wicked.lua

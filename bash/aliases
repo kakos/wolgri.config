@@ -1,3 +1,4 @@
+alias trnm=" transmission-remote mybook:9091"
 alias awesome-restart='echo "awesome.restart()"|awesome-client'
 alias rm="rm -i"
 alias ls='ls --color'
