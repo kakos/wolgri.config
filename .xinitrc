@@ -9,6 +9,5 @@ xmodmap $HOME/.Xmodmap
 if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
  dbus-launch --sh-syntax --with-session
 fi
-
 awesome >> $HOME/awesome.err &
 exec bash $HOME/.autostart
