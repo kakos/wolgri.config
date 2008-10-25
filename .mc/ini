@@ -77,7 +77,7 @@ editor_backup_extension=~
 
 [Layout]
 equal_split=1
-first_panel_size=25
+first_panel_size=26
 message_visible=0
 keybar_visible=0
 xterm_title=0
