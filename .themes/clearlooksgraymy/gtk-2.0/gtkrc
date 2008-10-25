@@ -8,9 +8,9 @@ style "clearlooks-default"
 	GtkButton      ::child-displacement-y = 0  
 	GtkButton      ::default-border       = { 0, 0, 0, 0 }
 	GtkCheckButton ::indicator-size       = 14
-	GtkPaned       ::handle-size          = 1
-	GtkRange       ::trough-border        = 0
-	GtkRange       ::slider-width         = 15
+	GtkPaned       ::handle-size          = 0
+	GtkRange       ::trough-border        = 1
+	GtkRange       ::slider-width         = 14
 	GtkRange       ::stepper-size         = 1
 	GtkScale       ::slider-length        = 20 
 	GtkScale       ::trough-side-details  = 1
@@ -18,11 +18,11 @@ style "clearlooks-default"
 	GtkMenuBar     ::internal-padding     = 0
 	GtkExpander    ::expander-size        = 16
 	GtkToolbar     ::internal-padding     = 1
-	GtkTreeView    ::expander-size        = 14
-	GtkTreeView    ::vertical-separator   = 0
-	GtkMenu        ::horizontal-padding   = 0
-	GtkMenu        ::vertical-padding     = 0
-	WnckTasklist   ::fade-overlay-rect    = 0
+	GtkTreeView    ::expander-size        = 16
+	GtkTreeView    ::vertical-separator   = 1
+	GtkMenu        ::horizontal-padding   = 1
+	GtkMenu        ::vertical-padding     = 1
+	WnckTasklist   ::fade-overlay-rect    = 1
 	GtkButton      ::focus-padding	      = 1
   	GtkScrolledWindow ::scrollbar-spacing  = 1 
 	GtkStatusbar	::shadow_type	= GTK_SHADOW_NONE
@@ -36,7 +36,7 @@ style "clearlooks-default"
 	fg[PRELIGHT]      = "#222222"
 	fg[SELECTED]      = "#222222"
 	fg[ACTIVE]        = "#222222"
-	fg[INSENSITIVE]   = "#d0d0d0"
+	fg[INSENSITIVE]   = "gray30"
 
 	bg[NORMAL]        = "#ededed"
 	bg[PRELIGHT]      = "#ededed"
@@ -60,11 +60,11 @@ style "clearlooks-default"
 	{
 		colorize_scrollbar = TRUE  
 		scrollbar_color="#737373"
-		reliefstyle        = 1  
-		menubarstyle       = 1  
-		toolbarstyle	   = 1  
+		reliefstyle        = 0 
+		menubarstyle       = 2 
+		toolbarstyle	   = 0  
 		animation          = TRUE  
-		style              = GUMMY  
+		style              = GLOSSY#GUMMY #CLASSIC#
 		radius = 0.0 
 	}
 }
@@ -102,7 +102,7 @@ style "clearlooks-notebook" = "clearlooks-notebook-bg"
 	xthickness = 1  
 	ythickness = 1  
 engine "clearlooks" {
-		contrast = 0.6  
+		contrast = 0.9  
 	}
 }
 
@@ -130,23 +130,6 @@ style "clearlooks-menu-item" = "clearlooks-wider"
 	bg[PRELIGHT]    = "#737373"  
 }
 
-style "clearlooks-separator-menu-item"
-{
-	xthickness = 1
-	ythickness = 2
-
-  engine "pixmap"
-  {
-    image
-    {
-      function	  = HLINE
-      recolorable         = TRUE
-      file	  = "Menu-Menubar/menu-line.png"
-      border	  = { 1, 1, 1, 1 }
-      stretch	  = TRUE
-    }
-}
-}
 
 style "clearlooks-treeview"
 {
@@ -259,7 +242,7 @@ style "clearlooks-text-is-fg-color-workaround"
 	text[PRELIGHT]    = "#222222"
 	text[SELECTED]    = "#222222"
 	text[ACTIVE]      = "#222222"
-	text[INSENSITIVE] = "#d0d0d0"
+	text[INSENSITIVE] = "gray20"
 }
 
 style "clearlooks-menuitem-text-is-fg-color-workaround"
@@ -268,7 +251,7 @@ style "clearlooks-menuitem-text-is-fg-color-workaround"
 	text[PRELIGHT]      = "#d0d0d0"
 	text[SELECTED]      = "#222222"
 	text[ACTIVE]        = "#222222"
-	text[INSENSITIVE]   = "#d0d0d0"
+	text[INSENSITIVE]   = "gray20"
 }
 
 style "clearlooks-fg-is-text-color-workaround"
@@ -277,7 +260,7 @@ style "clearlooks-fg-is-text-color-workaround"
 	fg[PRELIGHT]    = "#222222"
 	fg[ACTIVE]      = "#222222"
 	fg[SELECTED]    = "#222222"
-	fg[INSENSITIVE] = "#d0d0d0"
+	fg[INSENSITIVE] = "gray20"
 }
 style "panelbuttons"{
 	GtkButton      ::focus-padding	      = 0 
@@ -313,8 +296,7 @@ widget_class "*<GtkComboBoxEntry>*" style "clearlooks-comboboxentry"
 widget_class "*<GtkCombo>*"         style "clearlooks-comboboxentry"
 widget_class "*<GtkMenuBar>*"           style "clearlooks-menubar"
 widget_class "*<GtkMenu>*"              style "clearlooks-menu"
-widget_class "*<GtkMenuItem>*"          style "clearlooks-menu-item"
-widget_class "*<GtkSeparatorMenuItem>*" style "clearlooks-separator-menu-item"
+#widget_class "*<GtkSeparatorMenuItem>*" style "clearlooks-separator-menu-item"
 widget_class "*.<GtkFrame>.<GtkLabel>" style "clearlooks-frame-title"
 widget_class "*.<GtkTreeView>*"        style "clearlooks-treeview"
 widget_class "*<GtkProgressBar>"       style "clearlooks-progressbar"

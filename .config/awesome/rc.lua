@@ -170,11 +170,11 @@ max_value = 100
 skbwidget = widget({ type = 'textbox', name = 'skbwidget' , align = 'right' })
 --}}}
 --{{{ temp
-tempwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
+tempwidget = widget({ type = 'textbox', name = 'cfreqwidget' , align = 'right' })
 --}}}
 
 --{{{ Mhz
-mhzwidget = widget({ type = 'textbox', name = 'mhzwidget' , align = 'right' })
+cfreqwidget = widget({ type = 'textbox', name = 'cfreqwidget' , align = 'right' })
 --}}}
 --{{{ Cpu
 
@@ -305,7 +305,7 @@ mystatusbar = {}
         mytasklist,
         mypromptbox,tb_spacer,
         tempwidget,tb_spacer,
-        mhzwidget,tb_spacer,
+        cfreqwidget,tb_spacer,
         cpu0graphwidget,tb_spacer,
         cpu1graphwidget,tb_spacer,
         membarwidget,tb_spacer,
@@ -605,15 +605,15 @@ function get_mem()
  membarwidget:bar_data_add("mem",mem_percent)
 end
 --}}}
---{{{ mhz hook
-function get_mhz()
-    local m = io.popen("cat /proc/cpuinfo|grep MHz|uniq|awk '{print ($4)/1000}'")
+--{{{ cfreq hook
+function get_cfreq()
+    local m = io.popen("cpufreq-info -p | awk '{print $3 }'")
       for line in m:lines() do
-            mhz = line
+            cfreq = line
       end    
 
     m:close()
-mhzwidget.text =""..mhz..""
+cfreqwidget.text =""..cfreq..""
 end 
 --}}} 
 --{{{ temp hook
@@ -641,7 +641,7 @@ end
 --{{{ wifi hook
 
 local function get_iwinfo_iwcfg()
-    local wlann="wlan0"
+    local wlann="ath0"
 	local f1 = io.popen("/sbin/iwconfig " .. wlann)
 	if not f1 then
 		return
@@ -850,7 +850,7 @@ function onesec()
     hook_timer()
     get_mem()
     get_cpu()
-    get_mhz()
+    get_cfreq()
     get_skb()
 end
 

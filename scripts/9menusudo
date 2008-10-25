@@ -1,7 +1,7 @@
 #!/bin/bash
 function net()
 {
-INTERFACE="wlan0 wlan1 eth0 "
+INTERFACE="ath0 eth0 "
 for i in $INTERFACE ;do 
 if /sbin/ifconfig "$i" | grep -Fw UP >/dev/null
 then
@@ -12,4 +12,4 @@ fi
 done 
 }
 net
-9menu -warp -popup -geometry -0+20 -fg green -bg gray20 "$wlan0"  "$wlan1"  "$eth0"  "wifi:sudo wpa_gui"  "poweroff:sudo poweroff"  "reboot:sudo reboot"  
+9menu -warp -popup -geometry -0+20 -fg green -bg gray20 "$ath0" "$eth0"  "wifi:sudo wpa_gui"  "poweroff:sudo poweroff"  "reboot:sudo reboot"  

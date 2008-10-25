@@ -8,7 +8,7 @@ XTerm*metaSendsEscape: true
 XTerm*geometry: 50x25
 
 ! URXVT Colors
-URxvt*background:       gray5 
+URxvt*background:       gray25
 URxvt*foreground:       gray90
 !Black text
 URxvt*color0:           gray10
