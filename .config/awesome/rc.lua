@@ -8,6 +8,8 @@
 require("awful")
 require("tabulous")
 require("beautiful")
+require("naughty")
+require("menu")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
@@ -26,7 +28,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
+--{{{ Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
     "tile",
@@ -42,8 +44,8 @@ layouts =
 --    "dwindle",
     "floating"
 }
-
--- Table of clients that should be set floating. The index may be either
+--}}}
+--{{{ Table of clients that should be set floating. The index may be either
 -- the application class or instance. The instance is useful when running
 -- a console app in a terminal like (Music on Console)
 --    xterm -name mocp -e mocp
@@ -56,8 +58,8 @@ floatapps =
     -- by instance
     ["mocp"] = true
 }
-
--- Applications to be moved to a pre-defined tag by class or instance.
+--}}}
+--{{{ Applications to be moved to a pre-defined tag by class or instance.
 -- Use the screen and tags indices.
 
 apptags =
@@ -70,10 +72,40 @@ apptags =
 
 
 }
-
+--}}}
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
 -- }}}
+
+--{{{ Create a laucher widget and a main menu
+
+mysudomenu = {
+    {"wifitool", "sudo wpa_gui"},
+    {"reboot", "sudo reboot"},
+    {"poweroff", "sudo poweroff"}
+
+}
+
+myawesomemenu = {
+   {"manual", terminal .. " -e man awesome" },
+   {"edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
+   {"restart", awesome.restart },
+   {"quit", awesome.quit }
+}
+
+mymainmenu = {
+   {"Applications", menu.debian_menu_Applications , "/usr/share/pixmaps/debian-logo.png"},
+   {"awesome", myawesomemenu, "/usr/local/share/awesome/icons/awesome16.png" },
+   {"sudomenu", mysudomenu},
+   
+   {"open terminal", terminal }
+}
+
+mylauncher = awful.widget.launcher({ name = "mylauncher",
+                                     image = "/usr/local/share/awesome/icons/awesome16.png",
+                                     menu = { id="mymainmenu", items=mymainmenu } })
+
+--}}}
 
 -- {{{ Initialization
 -- Initialize theme (colors).
@@ -85,8 +117,27 @@ beautiful.init(theme_path)
 awful.beautiful.register(beautiful)
 
 -- Uncomment this to activate autotabbing
--- tabulous.autotab_start()
+tabulous.autotab_start()
 -- }}}
+
+--{{{ Naughty
+naughty.config.timeout          = 5
+naughty.config.screen           = 1
+naughty.config.position         = "top_right"
+naughty.config.margin           = 4
+naughty.config.height           = 16
+naughty.config.width            = 300
+naughty.config.gap              = 1
+naughty.config.ontop            = true
+naughty.config.font             = beautiful.font or "Verdana 8"
+naughty.config.icon             = nil
+naughty.config.fg               = beautiful.fg_focus or '#ffffff'
+naughty.config.bg               = beautiful.bg_focus or '#535d6c'
+naughty.config.border_color     = beautiful.border_focus or '#535d6c'
+naughty.config.border_width     = 1
+
+
+--}}}
 
 -- {{{ Tags
 -- Define tags table.
@@ -287,22 +338,6 @@ mytextbox = widget({ type = "textbox", name = "mytextbox", align = "right" })
 -- Set the default text in textbox
 mytextbox.text = "<b><small> " .. AWESOME_RELEASE .. " </small></b>"
 
--- Create a laucher widget and a main menu
-myawesomemenu = {
-   {"manual", terminal .. " -e man awesome" },
-   {"edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
-   {"restart", awesome.restart },
-   {"quit", awesome.quit }
-}
-
-mymainmenu = {
-   {"awesome", myawesomemenu, "/usr/local/share/awesome/icons/awesome16.png" },
-   {"open terminal", terminal }
-}
-
-mylauncher = awful.widget.launcher({ name = "mylauncher",
-                                     image = "/usr/local/share/awesome/icons/awesome16.png",
-                                     menu = { id="mymainmenu", items=mymainmenu } })
 
 -- Create a systray
 mysystray = widget({ type = "systray", name = "mysystray", align = "right" })
@@ -437,7 +472,7 @@ keybinding( {none}, "XF86HomePage", function () awful.util.spawn("sudo cpufreq-s
 keybinding( {none}, "XF86Start", function () awful.util.spawn("sudo cpufreq-set -g powersave") end):add()
 keybinding( {none}, "XF86WWW", function () awful.util.spawn("swiftfox") end):add()
 keybinding( {none}, "XF86Mail", function () awful.util.spawn("urxvt -e mutt") end):add()
-keybinding( {none}, "XF86Messenger", function () awful.menu.new({ id="mainmenu", items=mainmenu}) end):add()
+keybinding( {none}, "XF86Messenger", function () awful.menu.new({ id="mymainmenu", items=mymainmenu}) end):add()
 --}}}
 
 -- {{{Client manipulation

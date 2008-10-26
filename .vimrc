@@ -1,6 +1,6 @@
 " Theme
 if has("gui_running")
-  colo   blackboard
+  colo   inkpot
 else
  colo ron
 endif

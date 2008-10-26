@@ -46,4 +46,6 @@ titlebar_close_button = true
 
 # You can use your own command to set your wallpaper
 #wallpaper_cmd = awsetbg /usr/local/share/awesome/themes/default-background.png
-wallpaper_cmd = nitrogen --restore 
+wallpaper_cmd = nitrogen --restore
+menu_width = 150
+ 
