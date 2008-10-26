@@ -1,5 +1,5 @@
 # -- THEME AUTO-WRITTEN DO NOT EDIT
-include "/home/wolgri/.themes/clearlooksgraymy/gtk-2.0/gtkrc"
+include "/home/wolgri/.themes/my/gtk-2.0/gtkrc"
 
 style "user-font" {
 	font_name = "Liberation Sans 9"

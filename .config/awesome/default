@@ -2,14 +2,14 @@
 -- Default awesome theme --
 ---------------------------
 
-font          = sans 8
+font          = fixed 8
 
-bg_normal     = gray20
-bg_focus      = dim gray
+bg_normal     = black
+bg_focus      = gray30
 bg_urgent     = red
 
-fg_normal     = gray80
-fg_focus      = gray80
+fg_normal     = white
+fg_focus      = green
 fg_urgent     = white
 
 border_width  = 1
@@ -23,7 +23,8 @@ border_marked = #91231c
 # [taglist|tasklist]_[bg|fg]_[focus|urgent]
 # titlebar_[bg|fg]_[normal|focus]
 # Example:
-taglist_bg_focus = #ff0000
+taglist_bg_focus = red
+taglist_fg_focus = black
 
 # Display the taglist squares
 taglist_squares = true

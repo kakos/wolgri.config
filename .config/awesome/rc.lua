@@ -18,8 +18,10 @@ theme_path = home_dir.."/.config/awesome/default"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+-- Define if we want to use titlebar on all applications.
+use_titlebar = false
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -73,8 +75,6 @@ apptags =
 
 }
 --}}}
--- Define if we want to use titlebar on all applications.
-use_titlebar = false
 -- }}}
 
 --{{{ Create a laucher widget and a main menu
@@ -97,7 +97,7 @@ mymainmenu = {
    {"Applications", menu.debian_menu_Applications , "/usr/share/pixmaps/debian-logo.png"},
    {"awesome", myawesomemenu, "/usr/local/share/awesome/icons/awesome16.png" },
    {"sudomenu", mysudomenu},
-   
+   {"File manager", "pcmanfm" },
    {"open terminal", terminal }
 }
 
@@ -318,8 +318,9 @@ ratewidget = widget({ type = 'textbox', name = 'ratewidget',align = 'right' })
 botbox = {}
 botbox[1] = wibox({ position = "bottom", name = "botbox" .. 1, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
 -- Add widgets to the wibox - order matters
-botbox[1].widgets = { 
-     battarywidget,tb_space,
+botbox[1].widgets = {
+     mylauncher,
+     battarywidget,
      tempwidget,tb_spacer,
      cfreqwidget,tb_spacer,
      cpu0graphwidget,tb_spacer,
@@ -383,7 +384,6 @@ for s = 1, screen.count() do
                          fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = { 
-        mylauncher,tb_space,
         mytaglist[s],
         mytasklist[s],
         mypromptbox[s],
