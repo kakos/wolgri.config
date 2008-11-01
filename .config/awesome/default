@@ -2,7 +2,7 @@
 -- Default awesome theme --
 ---------------------------
 
-font          = fixed 8
+font          = Bitstream Vera Sans 8
 
 bg_normal     = black
 bg_focus      = gray30
@@ -12,7 +12,7 @@ fg_normal     = white
 fg_focus      = green
 fg_urgent     = white
 
-border_width  = 1
+border_width  = 0
 border_normal = #000000
 border_focus  = #535d6c
 border_marked = #91231c
@@ -35,7 +35,7 @@ taglist_squares = true
 bg_widget    = #cc0000
 
 # Display close button inside titlebar
-titlebar_close_button = true
+titlebar_close_button = false
 
 # Define the image to load
 @ (if titlebar_close_button_[normal|focus] these values are ignored)
@@ -48,5 +48,4 @@ titlebar_close_button = true
 # You can use your own command to set your wallpaper
 #wallpaper_cmd = awsetbg /usr/local/share/awesome/themes/default-background.png
 wallpaper_cmd = nitrogen --restore
-menu_width = 150
  

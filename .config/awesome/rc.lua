@@ -81,6 +81,8 @@ apptags =
 
 mysudomenu = {
     {"wifitool", "sudo wpa_gui"},
+    {"wifi reconnect", "sudo wpa_cli reconnect "},
+
     {"reboot", "sudo reboot"},
     {"poweroff", "sudo poweroff"}
 
@@ -229,7 +231,7 @@ cfreqwidget = widget({ type = 'textbox', name = 'cfreqwidget' , align = 'right' 
 --{{{ Cpu
 
 cpu0graphwidget = widget({ type = 'graph', name = 'cpu0graphwidget', align = 'right' }) 
-cpu0graphwidget.height = 0.95
+cpu0graphwidget.height = 1
 cpu0graphwidget.width = 100
 cpu0graphwidget.bg = '#333333'
 cpu0graphwidget.border_color = 'gray80'
@@ -243,7 +245,7 @@ style ='line',
 vertical_gradient = false 
 })
 cpu1graphwidget = widget({ type = 'graph', name = 'cpu1graphwidget', align = 'right' }) 
-cpu1graphwidget.height = 0.95
+cpu1graphwidget.height = 1
 cpu1graphwidget.width = 100
 cpu1graphwidget.bg = '#333333'
 cpu1graphwidget.border_color = 'gray80'
@@ -258,26 +260,32 @@ vertical_gradient = false
 })
 --}}}
 --{{{MeM 
-membarwidget = widget({ type = 'progressbar', name = 'membarwidget', align = 'right' })
+memwidget = widget({ type = 'graph', name = 'memwidget', align = 'right' })
 
-membarwidget.width = 40
-membarwidget.height = 0.85
-membarwidget.gap = 0
-membarwidget.border_padding = 1
-membarwidget.border_width = 1
-membarwidget.ticks_count = 0
-membarwidget.ticks_gap = 0
-membarwidget.vertical = false
+memwidget.width = 80
+memwidget.height = 1
+memwidget.gap = 0
+memwidget.border_padding = 0
+memwidget.border_width = 0
+--memwidget.ticks_count = 0
+--memwidget.ticks_gap = 0
+memwidget.vertical = false
+memwidget.grow = "left"
 
-membarwidget:bar_properties_set('mem', {
-bg = 'blue',
-fg = 'red',
-fg_center = 'red2',
-fg_end = 'red3',
-fg_off = 'green',
-reverse = false,
-min_value = 0,
-max_value = 100
+--memwidget:bar_properties_set('mem', {
+--bg = 'blue',
+--fg = 'red',
+--fg_center = 'red2',
+--fg_end = 'red3',
+--fg_off = 'green',
+--reverse = false,
+--min_value = 0,
+--max_value = 100
+--})
+memwidget:plot_properties_set('mem', { 
+fg = 'green',
+--style ='line',
+vertical_gradient = false 
 })
 
 --}}}
@@ -286,14 +294,14 @@ essidwidget = widget({ type = 'textbox', name = 'essidwidget',align = 'right' })
 
 lqbarwidget = widget({ type = 'progressbar', name = 'lqbarwidget', align = 'right' })
 
-lqbarwidget.width = 12
+lqbarwidget.width = 70
 lqbarwidget.height = 1
 lqbarwidget.gap = 0
 lqbarwidget.border_padding = 1
 lqbarwidget.border_width = 1
-lqbarwidget.ticks_count = 5
+lqbarwidget.ticks_count = 10
 lqbarwidget.ticks_gap = 1
-lqbarwidget.vertical = true
+lqbarwidget.vertical = false
 
 lqbarwidget:bar_properties_set('lq', {
 bg = 'gray20',
@@ -325,7 +333,7 @@ botbox[1].widgets = {
      cfreqwidget,tb_spacer,
      cpu0graphwidget,tb_spacer,
      cpu1graphwidget,tb_spacer,
-     membarwidget,tb_spacer,
+     memwidget,tb_spacer,
      essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
      datew
         }
@@ -670,7 +678,7 @@ function get_mem()
   io.close(fh)
 
   mem_percent = 100 * (mem_total - mem_free - mem_b - mem_c ) / mem_total;
- membarwidget:bar_data_add("mem",mem_percent)
+ memwidget:plot_data_add("mem",mem_percent)
 end
 --}}}
 --{{{ cfreq hook

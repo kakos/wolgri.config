@@ -4,15 +4,19 @@ if has("gui_running")
 else
  colo ron
 endif
-"temporary storage for swap files
-set backupdir=/tmp
-set directory=/tmp
 
 set guioptions-=T
 set guifont="Terminus 16"
 set nocompatible
-set ruler showcmd nu incsearch nohlsearch scrolljump=7 scrolloff=7 novisualbell t_vb= mousemodel=popup 
-set termencoding=utf-8  ch=1  mousehide  autoindent backspace=indent,eol,start whichwrap+=<,>,[,] statusline=~ smartindent
+set ruler 
+set showcmd 
+set nu 
+set incsearch 
+set nohlsearch 
+set novisualbell 
+set termencoding=utf-8 
+set autoindent 
+set backspace=indent,eol,start 
 syntax on
 " KEys
 ino <Down> <C-O>gj
@@ -35,11 +39,6 @@ imap <F1> <esc>:MarksBrowser<cr>
 map <F2> :Texplore<cr>
 vmap <F2> <esc>:Texplore<cr>i
 imap <F2> <esc>:Texplore<cr>i
-
-"Ctags hotkey
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-nmap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-imap <C-F12> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 set wildmenu
 set wcm=<Tab> 

@@ -89,7 +89,7 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/wolgri/Desktop
+other_dir=/home/wolgri/Desktop/gtkfm-0.10b.tar.gz#utar
 current_is_left=1
 
 [New Left Panel]
