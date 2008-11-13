@@ -269,7 +269,7 @@ botbox[1].widgets = {
      cpu0graphwidget,tb_spacer,
      cpu1graphwidget,tb_spacer,
      memwidget,tb_spacer,
-     essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
+--     essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
      datew
         }
 botbox[1].screen = 1
@@ -718,7 +718,7 @@ function onesec()
 end
 
 function fivesec()
-    update_iwinfo()
+--    update_iwinfo()
     get_bat()
     get_temp()
 

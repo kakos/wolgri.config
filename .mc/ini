@@ -1,6 +1,6 @@
 
 [Colors]
-base_color=lightgray,green:normal=default,default:selected=red,default:marked=yellow,default:markselect=red,white:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:special=lightgray,default:errors=white,red:reverse=green,default:gauge=red,white:input=default,default:dnormal=green,default:dfocus=brightgreen,gray:dhotnormal=cyan,default:dhotfocus=brightcyan,default:menu=white,default:menuhot=cyan,default:menusel=white,red:menuhotsel=cyan,default:helpnormal=cyan,default:editnormal=green,default:editbold=blue,default:editmarked=gray,blue:stalelink=red,default
+base_color=lightgray,green:normal=default,default:selected=red,gray:marked=yellow,default:markselect=red,white:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:special=lightgray,default:errors=white,red:reverse=green,default:gauge=red,white:input=default,default:dnormal=green,default:dfocus=brightgreen,gray:dhotnormal=cyan,default:dhotfocus=brightcyan,default:menu=white,default:menuhot=cyan,default:menusel=brightwhite,blue:menuhotsel=cyan,default:helpnormal=cyan,default:editnormal=green,default:editbold=blue,default:editmarked=gray,blue:stalelink=red,default
 
 [Midnight-Commander]
 show_backups=1
@@ -89,7 +89,7 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=/home/wolgri/Desktop/gtkfm-0.10b.tar.gz#utar
+other_dir=/
 current_is_left=1
 
 [New Left Panel]
