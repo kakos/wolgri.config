@@ -5,7 +5,7 @@ require("menu")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/usr/local/share/awesome/themes/default/theme"
+theme_path = "/usr/local/share/awesome/themes/sky/theme"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -73,7 +73,7 @@ beautiful.init(theme_path)
 -- Register theme in awful.
 -- This allows to not pass plenty of arguments to each function
 -- to inform it about colors we want it to draw.
-awful.beautiful.register(beautiful)
+--awful.beautiful.register(beautiful)
 -- }}}
 
 -- {{{ Tags
@@ -145,8 +145,8 @@ battarywidget.ticks_count = 10
 battarywidget.ticks_gap = 1
 battarywidget.vertical = false
 battarywidget:bar_properties_set('bat', {
-bg = 'black',
-fg = 'blue4',
+bg = beautiful.fg_urgent,
+fg = beautiful.bg_focus,
 fg_off = 'red',
 reverse = false,
 min_value = 0,
@@ -168,12 +168,12 @@ cfreqwidget = widget({ type = 'textbox', name = 'cfreqwidget' , align = 'right' 
 cpu0graphwidget = widget({ type = 'graph', name = 'cpu0graphwidget', align = 'right' }) 
 cpu0graphwidget.height = 1
 cpu0graphwidget.width = 100
-cpu0graphwidget.bg = '#333333'
-cpu0graphwidget.border_color = 'gray80'
+cpu0graphwidget.bg = beautiful.bg_normal
+cpu0graphwidget.border_color = beautiful.fg_urgent
 cpu0graphwidget.grow = 'left'
 
 cpu0graphwidget:plot_properties_set('cpu', { 
-fg = 'red',
+fg = beautiful.bg_urgent,
 style ='line',
 --fg_center = 'green', 
 --fg_end = 'cyan', 
@@ -182,12 +182,12 @@ vertical_gradient = false
 cpu1graphwidget = widget({ type = 'graph', name = 'cpu1graphwidget', align = 'right' }) 
 cpu1graphwidget.height = 1
 cpu1graphwidget.width = 100
-cpu1graphwidget.bg = '#333333'
-cpu1graphwidget.border_color = 'gray80'
+cpu1graphwidget.bg = beautiful.bg_normal
+cpu1graphwidget.border_color = beautiful.fg_urgent
 cpu1graphwidget.grow = 'left'
 
 cpu1graphwidget:plot_properties_set('cpu', { 
-fg = 'red',
+fg = beautiful.bg_urgent,
 style ='line',
 --fg_center = 'green', 
 --fg_end = 'cyan', 
@@ -206,19 +206,8 @@ memwidget.border_width = 0
 --memwidget.ticks_gap = 0
 memwidget.vertical = false
 memwidget.grow = "left"
-
---memwidget:bar_properties_set('mem', {
---bg = 'blue',
---fg = 'red',
---fg_center = 'red2',
---fg_end = 'red3',
---fg_off = 'green',
---reverse = false,
---min_value = 0,
---max_value = 100
---})
 memwidget:plot_properties_set('mem', { 
-fg = 'green',
+fg = beautiful.fg_urgent,
 --style ='line',
 vertical_gradient = false 
 })
@@ -677,7 +666,7 @@ battarywidget:bar_data_add("bat",batt )
 end
 
 --}}}
---{{{ date hook I want  date in Ukrainian   
+--{{{ date hook 
 function hook_timer ()
     os.setlocale(os.getenv("LC_ALL"))
     datew.text ="<bg color=\"gray30\"/><span font_desc=\"sans bold 8\" color=\"white\">"..os.date('%a %d %b  %H:%M').."</span>"
@@ -714,7 +703,7 @@ function onesec()
     get_mem()
     get_cpu()
     get_cfreq()
-    get_skb()
+--    get_skb()
 end
 
 function fivesec()

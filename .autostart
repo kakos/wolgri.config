@@ -12,8 +12,9 @@ sleep 4
 lilyterm -t 2 &
 setroot -solid '#222222' -cursor_name left_ptr &
 unclutter -root -idle 5 &
-nitrogen --restore
-x11vnc -usepw -shared -forever > /dev/null &
+#nitrogen --restore
+#x11vnc -usepw -shared -forever > /dev/null &
+wicd-client&
 #fuse.sh restart
 www&
 xscreensaver > /dev/null
