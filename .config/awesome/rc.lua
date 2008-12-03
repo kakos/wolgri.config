@@ -1,3 +1,7 @@
+-- awesome (awesome) v3.1-rc3-7-g76b5113 (When Doves Cry)
+-- • Build: Nov 22 2008 21:13:58 for i686 by gcc version 4.3.2 (wolgri@acer4520)
+-- • D-Bus support: ✔
+  
 -- Include awesome libraries, with lots of useful function!
 require("awful")
 require("beautiful")
@@ -5,7 +9,7 @@ require("menu")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/usr/local/share/awesome/themes/sky/theme"
+theme_path = "/usr/local/share/awesome/themes/default/theme"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -46,6 +50,8 @@ floatapps =
     ["MPlayer"] = true,
     ["pinentry"] = true,
     ["gimp"] = true,
+    ["wicd-client.py"] = true,
+
     -- by instance
     ["mocp"] = true
 }

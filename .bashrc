@@ -14,17 +14,22 @@ export LC_ALL=uk_UA.UTF-8
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 export EDITOR="vim"
 #}}}
-shopt -s checkwinsize
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
 eval `dircolors -b ~/.dircolors`
-shopt -s histverify  extglob cmdhist
-shopt -u promptvars sourcepath
+
+shopt -s cdspell
+shopt -s extglob
+shopt -s cmdhist
+shopt -s checkwinsize
+shopt -s no_empty_cmd_completion
+shopt -u promptvars
 set -o noclobber
 #kill flow control
 if tty -s ; then
     stty -ixon
     stty -ixoff
 fi
+
 complete -cf sudo         # sudo tab-completion
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
@@ -37,6 +42,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 # {{{ Alias
 alias trnm=" transmission-remote mybook:9091"
+alias lls='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
 alias awesome-restart='echo "awesome.restart()"|awesome-client'
 alias rm="rm -i"
 alias ls='ls --color'
@@ -173,5 +179,40 @@ fi
 
 export PROMPT_COMMAND='echo -ne "\033]2;$LOGNAME@$HOSTNAME    $PWD\007\033]1;$LOGNAME@$HOST\007"'
 
+#}}}
+#{{{ GNU Screen Login greeting
+if [ "$TERM" = "screen" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
+  detached_screens=`screen -list | grep Detached`
+  if [ ! -z "$detached_screens" ]; then
+    echo "+---------------------------------------+"
+    echo "| Detached screens are available:       |"
+    echo "$detached_screens"
+    echo "+---------------------------------------+"
+  else
+    echo "[ screen is activated ]"
+  fi
+  export SHOWED_SCREEN_MESSAGE="true"
+fi
+#}}}
+#{{{ linux console colours - ala Phrakture
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0222222" #black
+    echo -en "\e]P8222222" #darkgrey
+    echo -en "\e]P1803232" #darkred
+    echo -en "\e]P9982b2b" #red
+    echo -en "\e]P25b762f" #darkgreen
+    echo -en "\e]PA89b83f" #green
+    echo -en "\e]P3aa9943" #brown
+    echo -en "\e]PBefef60" #yellow
+    echo -en "\e]P4324c80" #darkblue
+    echo -en "\e]PC2b4f98" #blue
+    echo -en "\e]P5706c9a" #darkmagenta
+    echo -en "\e]PD826ab1" #magenta
+    echo -en "\e]P692b19e" #darkcyan
+    echo -en "\e]PEa1cdcd" #cyan
+    echo -en "\e]P7ffffff" #lightgrey
+    echo -en "\e]PFdedede" #white
+    clear #for background artifacting
+fi
 #}}}
 # vim: set fdm=marker tabstop=4 shiftwidth=4 expandtab smarttab autoindent smartindent nu:

@@ -1,4 +1,5 @@
 #shell /bin/zsh
+termcapinfo rxvt|rxvt-unicode|urxvt|rxvt-256color|screen|xs|rxvt ti@:te@
 nethack               on
 autodetach            on              # Standard: on
 crlf                  on             # Standard: off
@@ -15,7 +16,10 @@ encoding utf8
 defsilence off
 defutf8 on
 shelltitle '%n|%t|%h|'
-hardstatus alwayslastline  "%{= Rw}[%H]%{bw} %{Kw} %c %{bw} %-w%{+b wK} [(%n)%t] %{-}%+w %=%f  %{Rw} %l %{bw}"
+#hardstatus alwayslastline  "%{= Rw}[%H]%{bw} %{Kw} %c %{bw} %-w%{+b wK} [(%n)%t] %{-}%+w %=%f  %{Rw} %l %{bw}"
+caption always              "%?%{ Wk}%-Lw%?%{Rk}%n*%f %t%?(%u)%?%?%{Wk}%+Lw%? %=%l %{Rk}%=%c %{Rk}%d.%M.%Y"
+caption always              "%{= Rw}[%H]%{bw} %{Kw} %c %{bw} %-w%{+b wK} [(%n)%t]%?%? %{-}%+w %=%f  %{Rw} %l %{bw}"
+
 bind k
 bind ^k
 bind .
