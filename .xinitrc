@@ -2,7 +2,9 @@ export PATH=$PATH:$HOME/bin:$HOME/scripts
 export DISPLAY=":0"
 export LANG=uk_UA.UTF-8
 export LC_ALL=uk_UA.UTF-8
-
+xset fp+ /home/wolgri/.fonts/ 
+xset fp rehash
+wolgri@acer4520 ~ 
 xrdb $HOME/.Xdefaults
 xmodmap $HOME/.Xmodmap
 # Launch DBUS

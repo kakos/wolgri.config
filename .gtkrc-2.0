@@ -2,12 +2,12 @@
 include "/home/wolgri/.themes/Clearlooks-compact2/gtk-2.0/gtkrc"
 
 style "user-font" {
-	font_name = "Liberation Sans 9"
+	font_name = "Tahoma 9"
 }
 
 widget_class "*" style "user-font"
 
-gtk-font-name="Liberation Sans 9"
+gtk-font-name="Tahoma 9"
 
 include "/home/wolgri/.gtkrc.mine"
 

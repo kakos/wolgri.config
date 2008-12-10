@@ -1,7 +1,7 @@
--- awesome (awesome) v3.1-rc3-7-g76b5113 (When Doves Cry)
--- • Build: Nov 22 2008 21:13:58 for i686 by gcc version 4.3.2 (wolgri@acer4520)
+--awesome (awesome) v3.1-rc5-2-ge8186e6 (Face)
+-- • Build: Dec  8 2008 16:35:31 for i686 by gcc version 4.3.2 (wolgri@acer4520)
 -- • D-Bus support: ✔
-  
+
 -- Include awesome libraries, with lots of useful function!
 require("awful")
 require("beautiful")
@@ -9,7 +9,7 @@ require("menu")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/usr/local/share/awesome/themes/default/theme"
+theme_path = "/usr/local/share/awesome/themes/sky/theme"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -251,26 +251,6 @@ ratewidget = widget({ type = 'textbox', name = 'ratewidget',align = 'right' })
 --}}}
 --}}}
 
---{{{ Bottom panel
--- Create a botbox for each screen and add it
-botbox = {}
-botbox[1] = wibox({ position = "bottom", name = "botbox" .. 1, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
--- Add widgets to the wibox - order matters
-botbox[1].widgets = {
-     mylauncher,
-     battarywidget,
-     tempwidget,tb_spacer,
-     cfreqwidget,tb_spacer,
-     cpu0graphwidget,tb_spacer,
-     cpu1graphwidget,tb_spacer,
-     memwidget,tb_spacer,
---     essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
-     datew
-        }
-botbox[1].screen = 1
-
---}}}
-
 -- {{{ Wibox
 -- Create a textbox widget
 mytextbox = widget({ type = "textbox", align = "right" })
@@ -334,17 +314,38 @@ for s = 1, screen.count() do
                                               end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = wibox({ position = "top", fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    mywibox[s] = wibox({ position = "top", height = "13" ,fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = { mylauncher,
                            mytaglist[s],
                            mytasklist[s],
                            mypromptbox[s],
                            mylayoutbox[s],
-                           s == 1 and mysystray or nil }
+--                           s == 1 and mysystray or nil 
+}
     mywibox[s].screen = s
 end
 -- }}}
+
+--{{{ Bottom panel
+-- Create a botbox for each screen and add it
+botbox = {}
+botbox[1] = wibox({ position = "bottom", name = "botbox" .. 1 , height = "18", fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+-- Add widgets to the wibox - order matters
+botbox[1].widgets = {
+     mylauncher,
+     battarywidget,
+     tempwidget,tb_spacer,
+     cfreqwidget,tb_spacer,
+     cpu0graphwidget,tb_spacer,
+     cpu1graphwidget,tb_spacer,
+     memwidget,tb_spacer,
+--     essidwidget,tb_spacer, lqbarwidget,tb_spacer, ratewidget, tb_spacer,
+     datew,mysystray
+        }
+botbox[1].screen = 1
+
+--}}}
 
 -- {{{ Mouse bindings
 awesome.buttons({
