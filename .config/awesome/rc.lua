@@ -1,5 +1,5 @@
---awesome (awesome) v3.1-rc5-2-ge8186e6 (Face)
--- • Build: Dec  8 2008 16:35:31 for i686 by gcc version 4.3.2 (wolgri@acer4520)
+-- awesome (awesome) v3.1 (Helicopter)
+-- • Build: Dec 13 2008 06:52:48 for i686 by gcc version 4.3.2 (wolgri@acer4520)
 -- • D-Bus support: ✔
 
 -- Include awesome libraries, with lots of useful function!
@@ -9,7 +9,7 @@ require("menu")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
-theme_path = "/usr/local/share/awesome/themes/sky/theme"
+theme_path = "/usr/local/share/awesome/themes/default/theme"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -314,7 +314,7 @@ for s = 1, screen.count() do
                                               end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = wibox({ position = "top", height = "13" ,fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    mywibox[s] = wibox({ position = "top", height = "16" ,fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = { mylauncher,
                            mytaglist[s],
