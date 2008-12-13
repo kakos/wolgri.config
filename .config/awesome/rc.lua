@@ -400,17 +400,7 @@ end
 --keybinding({ modkey }, "Left", awful.tag.viewprev):add()
 --keybinding({ modkey }, "Right", awful.tag.viewnext):add()
 --keybinding({ modkey }, "Escape", awful.tag.history.restore):add()
-
---{{{ Standard program
-keybinding({ modkey }, "Return", function () awful.util.spawn(terminal) end):add()
-
-keybinding({ modkey, "Control" }, "r", function ()
-                                           mypromptbox[mouse.screen].text =
-                                               awful.util.escape(awful.util.restart())
-                                        end):add()
-keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
-
---}}}
+--{{{ ADDs
 --{{{ Fn keys 
 
 keybinding( {none}, "XF86AudioMute", function () awful.util.spawn("amixer -c 0 set Master toggle") end):add()
@@ -427,6 +417,45 @@ keybinding( {none}, "XF86WWW", function () awful.util.spawn("swiftfox") end):add
 keybinding( {none}, "XF86Mail", function () awful.util.spawn("urxvt -e mutt") end):add()
 keybinding( {none}, "XF86Messenger", function () mymainmenu:toggle() end):add()
 --}}}
+--{{{ rotate clients and focus master...
+keybinding({ modkey }, "Tab", function ()
+    local allclients = awful.client.visible(client.focus.screen)
+  
+    for i,v in ipairs(allclients) do
+      if allclients[i+1] then
+        allclients[i+1]:swap(v)
+      end
+    end
+    awful.client.focus.byidx(-1)
+  end):add()
+
+-- ... the other way 'round!
+keybinding({ modkey, "Shift" }, "Tab", function ()
+    local allclients = awful.client.visible(client.focus.screen)
+    local toswap
+
+    for i,v in ipairs(allclients) do
+      if toswap then
+        toswap:swap(v)
+        toswap = v
+      else
+        toswap = v
+      end
+    end
+    awful.client.focus.byidx(-1)
+  end):add()
+--}}}
+--}}}
+--{{{ Standard program
+keybinding({ modkey }, "Return", function () awful.util.spawn(terminal) end):add()
+
+keybinding({ modkey, "Control" }, "r", function ()
+                                           mypromptbox[mouse.screen].text =
+                                               awful.util.escape(awful.util.restart())
+                                        end):add()
+keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
+
+--}}}
 --{{{ Client manipulation
 keybinding({ modkey }, "m", awful.client.maximize):add()
 keybinding({ modkey }, "F5", function () client.focus.fullscreen = not client.focus.fullscreen end):add()
@@ -440,7 +469,7 @@ keybinding({ modkey, "Control" }, "Right", function () awful.screen.focus(-1) en
 keybinding({ modkey, "Control" }, "space", awful.client.togglefloating):add()
 keybinding({ modkey, "Control" }, "Return", function () client.focus:swap(awful.client.getmaster()) end):add()
 keybinding({ modkey }, "o", awful.client.movetoscreen):add()
-keybinding({ modkey }, "Tab", awful.client.focus.history.previous):add()
+--keybinding({ modkey }, "Tab", awful.client.focus.history.previous):add()
 keybinding({ modkey }, "u", awful.client.urgent.jumpto):add()
 keybinding({ modkey, "Shift" }, "r", function () client.focus:redraw() end):add()
 --}}}
@@ -497,7 +526,6 @@ for i = 1, keynumber do
                    end):add()
 end
 -- }}}
-
 -- }}}
 
 -- {{{ My hooks
