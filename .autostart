@@ -17,4 +17,6 @@ unclutter -root -idle 5 &
 wicd-client&
 #fuse.sh restart
 www&
+wmname LG3D
+
 xscreensaver > /dev/null
