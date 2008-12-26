@@ -6,6 +6,8 @@
 require("awful")
 require("beautiful")
 require("menu")
+require("naughty")
+require("revelation")
 
 -- {{{ Variable definitions
 -- This is a file path to a theme file which will defines colors.
@@ -457,6 +459,7 @@ keybinding({ modkey, "Shift" }, "q", awesome.quit):add()
 
 --}}}
 --{{{ Client manipulation
+keybinding({ modkey }, "F2", revelation.revelation):add()
 keybinding({ modkey }, "m", awful.client.maximize):add()
 keybinding({ modkey }, "F5", function () client.focus.fullscreen = not client.focus.fullscreen end):add()
 keybinding({ modkey }, "w", function () client.focus:kill() end):add()
@@ -753,6 +756,50 @@ awful.hooks.timer.register(5, fivesec)
 --}}}
 --}}}
 
+--{{{ borrowed hooks 
+--{{{ Naughty Callendar 
+ local calendar = nil
+    local offset = 0
+
+    function remove_calendar()
+        if calendar ~= nil then
+            naughty.destroy(calendar)
+            calendar = nil
+            offset = 0
+        end
+    end
+
+    function add_calendar(inc_offset)
+        local save_offset = offset
+        remove_calendar()
+        offset = save_offset + inc_offset
+        local datespec = os.date("*t")
+        datespec = datespec.year * 12 + datespec.month - 1 + offset
+        datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
+        local cal = awful.util.pread("cal -m " .. datespec)
+        cal = string.gsub(cal, "^%s*(.-)%s*$", "%1")
+        calendar = naughty.notify({
+            text = os.date("%a, %d %B %Y") .. "\n" .. cal,
+            timeout = 0, hover_timeout = 0.5,
+            width = 160,
+        })
+    end
+
+    datew.mouse_enter = function()
+        add_calendar(0)
+    end
+    datew.mouse_leave = remove_calendar
+
+    datew:buttons({
+        button({ }, 4, function()
+            add_calendar(-1)
+        end),
+        button({ }, 5, function()
+            add_calendar(1)
+        end),
+    })
+--}}}
+--}}}
 -- {{{ Hooks
 -- Hook function to execute when focusing a client.
 awful.hooks.focus.register(function (c)

@@ -9,6 +9,7 @@ synclient HorizEdgeScroll=0
 synclient VertEdgeScroll=0
 synclient CircularScrolling=0
 sleep 4 
+ivman &
 lilyterm -t 2 &
 setroot -solid '#222222' -cursor_name left_ptr &
 unclutter -root -idle 5 &
